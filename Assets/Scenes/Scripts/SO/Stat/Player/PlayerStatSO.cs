@@ -8,10 +8,10 @@ public class PlayerStatSO : ScriptableObject
     public float moveSpeed;
     public float bodyRotatingSpeed;
     public float headRotatingSpeed;
-    public void SetMovement(float moveSpeed, float bodyRotatingSpeed, float headRotatingSpeed){
-        this.moveSpeed = moveSpeed;
-        this.bodyRotatingSpeed = bodyRotatingSpeed;
-        this.headRotatingSpeed = headRotatingSpeed;
+    public void SetMovement(PlayerStatSO stat){
+        this.moveSpeed = stat.moveSpeed;
+        this.bodyRotatingSpeed = stat.bodyRotatingSpeed;
+        this.headRotatingSpeed = stat.headRotatingSpeed;
     }
     //stats
     public int maxHealth;
