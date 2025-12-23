@@ -4,6 +4,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PlayerStat")]
 public class PlayerStatSO : ScriptableObject
 {
+    //movements
+    public float moveSpeed;
+    public float bodyRotatingSpeed;
+    public float headRotatingSpeed;
+    public void SetMovement(float moveSpeed, float bodyRotatingSpeed, float headRotatingSpeed){
+        this.moveSpeed = moveSpeed;
+        this.bodyRotatingSpeed = bodyRotatingSpeed;
+        this.headRotatingSpeed = headRotatingSpeed;
+    }
+    //stats
     public int maxHealth;
     public int healthRegen;
     public int maxMana;
