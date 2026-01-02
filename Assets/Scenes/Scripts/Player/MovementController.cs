@@ -38,7 +38,7 @@ public class MovementController : MonoBehaviour
 
         // Calculate target rotation
         float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle+90);
 
         // Smooth delayed rotation
         transform.rotation = Quaternion.RotateTowards(

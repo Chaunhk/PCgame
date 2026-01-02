@@ -24,12 +24,10 @@ public class ShootPointController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
         _mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 rotation = _mousePos - transform.position;
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
-        
     }
     private void Update()
     {
