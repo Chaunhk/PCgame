@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour
 }   
     }
     #endregion
+    public enum GameModes
+    {
+        TD,
+        VS,
+    }
+    public GameModes currentGameMode;
     public EventControl eventControl;
     public LevelManager levelManager;
     public Camera mainCamera;

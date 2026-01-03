@@ -16,7 +16,14 @@ public class EnemyMovement : MonoBehaviour
     {
         manager = GameManager.Instance;
         player = manager.player.GetComponent<PlayerController>();
-        target = path[index].gameObject.transform;
+        switch (manager.currentGameMode){
+            case GameManager.GameModes.TD: 
+                target = path[index].gameObject.transform;
+                break;
+            case GameManager.GameModes.VS: 
+                target = manager.player.transform;
+                break;
+        }
         rb = gameObject.GetComponent<Rigidbody2D>();
         enemy = gameObject.GetComponent<GeneralEnemy>();
     }
