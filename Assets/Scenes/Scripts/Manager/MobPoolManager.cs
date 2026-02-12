@@ -9,14 +9,17 @@ public class MobPoolManager : MonoBehaviour
     public float innerRadius;
     public float outerRadius;
     public GameObject enemyPrefab;
-    private IObjectPool<GameObject> mobPool;
+    private IObjectPool<GeneralEnemy> mobPool;
+
+    [SerializeField] private DropService dropService;
+
     void Start()
 {
     manager = GameManager.Instance;
     player = manager.player;
 
     // Pre-create 500 mobs so there is no lag during gameplay
-    List<GameObject> tempPrewarmList = new List<GameObject>();
+    List<GeneralEnemy> tempPrewarmList = new List<GeneralEnemy>();
     
     for (int i = 0; i < 500; i++)
     {
@@ -24,32 +27,53 @@ public class MobPoolManager : MonoBehaviour
     }
 
     // Immediately put them back so they are "Ready" in the pool
-    foreach (GameObject obj in tempPrewarmList)
+    foreach (GeneralEnemy obj in tempPrewarmList)
     {
         mobPool.Release(obj);
     }
 }
 
-    void Awake() {
-        // Initialize the pool logic
-        mobPool = new ObjectPool<GameObject>(
-            createFunc: () => Instantiate(enemyPrefab), // How to create a new one
-            actionOnGet: (obj) => obj.SetActive(true),  // What to do when taken from pool
-            actionOnRelease: (obj) => obj.SetActive(false), // What to do when returned
-            actionOnDestroy: (obj) => Destroy(obj),     // Cleanup if pool gets too big
-            collectionCheck: false, 
-            defaultCapacity: 500, // Pre-warm capacity
-            maxSize: 1000         // Limit for memory safety
+    void Awake()
+    {
+        //dropService = manager.gameObject.GetComponent<DropService>();
+        mobPool = new ObjectPool<GeneralEnemy>(
+            createFunc: () =>
+            {
+                GameObject obj = Instantiate(enemyPrefab);
+                return obj.GetComponent<GeneralEnemy>();
+            },
+
+            actionOnGet: (enemy) =>
+            {
+                enemy.gameObject.SetActive(true);
+                enemy.Initialize(dropService, mobPool);
+            },
+
+            actionOnRelease: (enemy) =>
+            {
+                enemy.gameObject.SetActive(false);
+            },
+
+            actionOnDestroy: (enemy) =>
+            {
+                Destroy(enemy.gameObject);
+            },
+
+            collectionCheck: false,
+            defaultCapacity: 500,
+            maxSize: 1000
         );
     }
 
-    public void SpawnMob(Vector3 position) {
-        GameObject mob = mobPool.Get(); // Grabs an inactive one automatically
+    public void SpawnMob(Vector3 position)
+    {
+        GeneralEnemy mob = mobPool.Get();
         mob.transform.position = position;
     }
 
-    public void KillMob(GameObject mob) {
-        mobPool.Release(mob); // Puts it back in the pool for reuse
+    public void KillMob(GeneralEnemy mob)
+    {
+        mobPool.Release(mob);
     }
     public Vector3 GetRandomSpawnPoint()
     {

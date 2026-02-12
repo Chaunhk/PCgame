@@ -7,4 +7,5 @@ public class EnemyStatSO : ScriptableObject
     public int objectiveCost;
     public int maxHealth;
     public int speed;
+    public DropTable dropTable;
 }
