@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     private GameManager manager;
-    private PlayerController player;
+    private PlayerManager player;
     [SerializeField] private List<SubPoint> path;
     [SerializeField] private int index;
     [SerializeField] private Transform target;
@@ -15,7 +15,7 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         manager = GameManager.Instance;
-        player = manager.player.GetComponent<PlayerController>();
+        player = manager.player.GetComponent<PlayerManager>();
         switch (manager.currentGameMode){
             case GameManager.GameModes.TD: 
                 target = path[index].gameObject.transform;
@@ -40,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
             }
             else if (index > path.Count) // when mob reached player
             {
-                enemy.Dead();
+                enemy.DeSpawn();
                 player.Damage(enemy.enemyStat.objectiveCost);
             }
             else //when mob still in it's route

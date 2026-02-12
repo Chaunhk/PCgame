@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameModes currentGameMode;
     public EventControl eventControl;
     public LevelManager levelManager;
+    public ExpManager expManager;
     public Camera mainCamera;
     public GameObject player;
     public PlayerStatSO playerBaseStat;

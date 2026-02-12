@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamageable
+public class PlayerManager : MonoBehaviour, IDamageable
 {
     private PlayerStatSO _playerStat;
     public int maxHealth;
     public int currentHealth;
     public int maxMana;
     public int currentMana;
+    public float pickUpRadius;
     public GameManager manager;
+    //public ExpManager expManager;
     public GeneralBar healthBar;
     public GeneralBar manaBar;
+    public GeneralBar expBar;
     [SerializeField] private int _manaRegen;
     [SerializeField] private float _manaCooldown,_regenInterval,_skillUsageBlock;
     [SerializeField] private bool _isManaRegenBlocked,_isUsingSkill;
     private void Start()
     {
         manager = GameManager.Instance;
+        //expManager = manager.expManager;
         _playerStat = manager.playerStat;
         InitStat();
         //gameObject.SetActive(false);
@@ -46,6 +51,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         // dir = manager.player.transform.position - transform.position;
         healthBar.InitData(maxHealth);
         manaBar.InitData(maxMana);
+        //expManager.ResetExpBar();
     }
     #endregion
     // todo: put hp regen here and make it work with upgrade
@@ -101,6 +107,17 @@ public class PlayerController : MonoBehaviour, IDamageable
             manaBar.Decrease(val);
         }
         return ManaCheck(val);
+    }
+    #endregion
+    #region Pickup
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Got "+ collision.tag);
+        if (collision.CompareTag("Exp"))
+        {
+            ExpBehavior exp = collision.GetComponent<ExpBehavior>();
+            exp.StartMoving(transform);
+        }
     }
     #endregion
 }

@@ -92,8 +92,11 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
     {
         // Spawn drops BEFORE releasing to pool
         Drop();
-
-        manager.enemyCount--;
+        DeSpawn();
+    }
+    public void DeSpawn()
+    {
+         manager.enemyCount--;
 
         if (manager.enemyCount == 0 && manager.isSpawnEnd)
             manager.eventControl.PassLevel();
@@ -101,7 +104,6 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
         // Return to pool (DO NOT disable manually)
         pool.Release(this);
     }
-
     private void Drop()
     {
         if (enemyStat.dropTable != null)

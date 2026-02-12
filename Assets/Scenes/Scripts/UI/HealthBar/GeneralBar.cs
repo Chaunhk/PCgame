@@ -31,6 +31,13 @@ public class GeneralBar : MonoBehaviour
         fill.fillAmount = 1;
         bar.fillAmount = 1;
     }
+    public void ResetData(int maxValue)
+    {
+        maxAmount = maxValue;
+        currentAmount = 0;
+        //fill.fillAmount = 0;
+        bar.fillAmount = 0;
+    }
     public void Decrease(int val)
     {
         DecreaseValue(maxAmount, currentAmount - val, val);

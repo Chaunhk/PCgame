@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Drops/DropTable")]
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects//DropTable")]
 public class DropTable : ScriptableObject
 {
     public DropEntry[] drops;

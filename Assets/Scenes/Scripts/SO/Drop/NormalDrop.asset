@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c86033499559eae4f9199dd08dcd10bd, type: 3}
   m_Name: NormalDrop
   m_EditorClassIdentifier: 
-  drops: []
+  drops:
+  - prefab: {fileID: 5342368178001513099, guid: 7306d269ef2640e448d346c8d311b87a, type: 3}
+    dropChance: 1
