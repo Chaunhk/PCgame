@@ -9,9 +9,9 @@ public class PlayerStatSO : ScriptableObject
     public float bodyRotatingSpeed;
     public float headRotatingSpeed;
     public void SetMovement(PlayerStatSO stat){
-        this.moveSpeed = stat.moveSpeed;
-        this.bodyRotatingSpeed = stat.bodyRotatingSpeed;
-        this.headRotatingSpeed = stat.headRotatingSpeed;
+        moveSpeed = stat.moveSpeed;
+        bodyRotatingSpeed = stat.bodyRotatingSpeed;
+        headRotatingSpeed = stat.headRotatingSpeed;
     }
     //stats
     public int maxHealth;
@@ -24,14 +24,15 @@ public class PlayerStatSO : ScriptableObject
     public float spCost;
     public int spDamage;
     public void SetStat(PlayerStatSO stat){
-        this.maxHealth = stat.maxHealth;
-        this.healthRegen = stat.healthRegen;
-        this.maxMana = stat.maxMana;
-        this.manaRegen = stat.manaRegen;
-        this.attackRate = stat.attackRate;
-        this.damage = stat.damage;
-        this.multiHit = stat.multiHit;
-        this.spCost = stat.spCost;
-        this.spDamage = stat.spDamage;
+        moveSpeed = stat.moveSpeed;
+        maxHealth = stat.maxHealth;
+        healthRegen = stat.healthRegen;
+        maxMana = stat.maxMana;
+        manaRegen = stat.manaRegen;
+        attackRate = stat.attackRate;
+        damage = stat.damage;
+        multiHit = stat.multiHit;
+        spCost = stat.spCost;
+        spDamage = stat.spDamage;
     }
 }

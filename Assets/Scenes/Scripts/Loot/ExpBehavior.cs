@@ -31,7 +31,7 @@ public class ExpBehavior : MonoBehaviour
         );
 
         // If very close → collect
-        if (Vector3.Distance(transform.position, player.position) < 0.2f)
+        if (Vector3.Distance(transform.position, player.position) < 0.5f)
         {
             Collect();
         }

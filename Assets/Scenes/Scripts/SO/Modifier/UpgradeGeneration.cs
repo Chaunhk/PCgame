@@ -39,7 +39,8 @@ public class UpgradeGeneration : MonoBehaviour
         }
         UpgradeGenerate();
         upgradeUI.SetActive(false);
-        manager.levelManager.PrepareLevel();
+        //manager.levelManager.PrepareLevel();
+        manager.eventControl.UnpauseEvent();
     }
     private void UpgradeGenerate()
     {

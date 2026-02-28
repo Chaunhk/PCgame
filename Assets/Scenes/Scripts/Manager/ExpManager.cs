@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ExpManager : MonoBehaviour
 {
+    [SerializeField] private GameManager manager;
+    [SerializeField] private EventControl eventControl;
     [SerializeField] private LevelExpSO levelExp;
     [SerializeField] private int currentExp;
     [SerializeField] private int lvUpExp;
@@ -13,13 +15,16 @@ public class ExpManager : MonoBehaviour
     {
         currentLv=1;
         lvUpExp=levelExp.baseExp;
-        expBar = GameManager.Instance.player.GetComponent<PlayerManager>().expBar;
+        manager = GameManager.Instance;
+        eventControl = manager.eventControl;
+        expBar = manager.player.GetComponent<PlayerManager>().expBar;
         ResetExpBar();
     }
     private void LevelUp()
     {
         currentLv++;
         lvUpExp=levelExp.baseExp*currentLv*levelExp.expMod;
+        eventControl.PassLevel();
         ResetExpBar();
     }
     public void GainExp(int expVal)
