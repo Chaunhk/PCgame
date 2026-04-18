@@ -41,25 +41,25 @@ public class Laser : GeneralProjectile
         boxTransform.position = new Vector3(avgx,avgy,0);
         //Consume mana every set interval
         if(!_isCostDelay){
-            if (playerController.ConsumeMana(_usageCost)) {
+            if (playerManager.ConsumeMana(_usageCost)) {
                 StartCoroutine(ManaDelay());
             }
             else DisableLaser();
         }
     }
     public void EnableLaser(){
-        if(playerController.ManaCheck(_aciveCost)){
-            playerController.ConsumeMana(_aciveCost);
+        if(playerManager.ManaCheck(_aciveCost)){
+            playerManager.ConsumeMana(_aciveCost);
             _lineRenderer.enabled = true;
             _hitbox.SetActive(true);
-            playerController.OnSkillStart();
+            playerManager.OnSkillStart();
             StartCoroutine(ManaDelay());
         }
     }
     public void DisableLaser(){
         _lineRenderer.enabled = false;
         _hitbox.SetActive(false);
-        playerController.OnSkillEnd();
+        playerManager.OnSkillEnd();
     }
     
     IEnumerator ManaDelay()

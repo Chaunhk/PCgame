@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : GeneralProjectile
+public class DamagePerTick : GeneralProjectile
 {
-    [SerializeField] private float _bulletLife;
+        [SerializeField] private float _bulletLife;
     [SerializeField] private float _speed;
     [SerializeField] private bool _hasHit;
     private void Update()
@@ -21,24 +21,13 @@ public class Bullet : GeneralProjectile
         yield return new WaitForSeconds(_bulletLife);
         o.SetActive(false);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
+        //Debug.Log("Hit"+ collision.tag);
         if (collision.CompareTag("Ground") || collision.CompareTag(tagDamage))
         {
             IDamageable damageable = collision.GetComponent<IDamageable>();
-            if (damageable != null)
-            {
-                damageable.Damage(manager.playerStat.damage);
-                
-            }
-            _hasHit = true;
-            DisableBullet();
-            gameObject.SetActive(false);
+            damageable?.Damage(manager.playerStat.damage);
         }
     }
-    public virtual void DisableBullet()
-    {
-        
-    }
-
 }

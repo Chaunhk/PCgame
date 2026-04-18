@@ -8,7 +8,7 @@ public class SkillBar : MonoBehaviour
     public Image fill;
     private float cdTime = 5f, currentFill = 1f;
     private float currentAmount;
-    public bool isDec;
+    public bool isCD;
     private float timer = 0f;
 
     void Update()
@@ -18,18 +18,24 @@ public class SkillBar : MonoBehaviour
         {
             UpdateBar();
         }
+        else isCD = false;
     }
     public void InitData(int maxValue)
     {
         cdTime = maxValue;
         currentAmount = maxValue;
-        fill.fillAmount = 1;
-  
+        fill.fillAmount = 0;
+        isCD = false;
     }
     public void StartCD()
     {
-        timer = 0f;
-        currentFill = 1f; // Reset to full
+        if (isCD == false)
+        {
+            isCD = true;
+            timer = 0f;
+            currentFill = 1f; // Reset to full
+        }
+        
     }
 
     private void UpdateBar()

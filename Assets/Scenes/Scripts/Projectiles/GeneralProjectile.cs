@@ -12,7 +12,7 @@ public class GeneralProjectile : MonoBehaviour
     protected GameManager manager;
     protected string tagDamage = "";
     protected static BulletType type;
-    [SerializeField] protected PlayerManager playerController;
+    [SerializeField] protected PlayerManager playerManager;
     protected virtual void Start()
     {
         manager = GameManager.Instance;
@@ -29,7 +29,7 @@ public class GeneralProjectile : MonoBehaviour
                     break;
                 }
         }
-        playerController = manager.player.GetComponent<PlayerManager>();
+        playerManager = manager.player.GetComponent<PlayerManager>();
     }
     
 }

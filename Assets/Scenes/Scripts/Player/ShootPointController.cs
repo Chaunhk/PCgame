@@ -11,6 +11,7 @@ public class ShootPointController : MonoBehaviour
     [SerializeField] private bool _actionDelay;
     [SerializeField] private float _actionSpeed;
     [SerializeField] private float _chainHitDelay;
+    [SerializeField] private Canon canon;
     private Laser laser;
     
     private void Start()
@@ -42,14 +43,15 @@ public class ShootPointController : MonoBehaviour
         //Lase
         if (laser!=null){
             if(Input.GetKeyDown(KeyCode.E)){
-                laser.EnableLaser();
+                //laser.EnableLaser();
+                canon.EnableFire(transform);
             }
             if (Input.GetKey(KeyCode.E)){
                 //if laser wasn't active, contantly check if it can active then enable it asap
-                laser.UpdateLaser(_mousePos);
+                //laser.UpdateLaser(_mousePos);
             }
             if(Input.GetKeyUp(KeyCode.E)){
-                laser.DisableLaser();
+                //laser.DisableLaser();
             }
         }
         
