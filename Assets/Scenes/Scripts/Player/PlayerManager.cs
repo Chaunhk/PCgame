@@ -33,10 +33,10 @@ public class PlayerManager : MonoBehaviour, IDamageable
     }
     private void FixedUpdate()
     {
-        if(!_isUsingSkill&&_manaCooldown>0)
-            _manaCooldown-=Time.deltaTime;
-        if(_manaCooldown<=0)
-            _isManaRegenBlocked = false;
+        // if(!_isUsingSkill&&_manaCooldown>0)
+        //     _manaCooldown-=Time.deltaTime;
+        // if(_manaCooldown<=0)
+        //     _isManaRegenBlocked = false;
     }
     #region Initialize
     private void InitStat()
@@ -73,8 +73,12 @@ public class PlayerManager : MonoBehaviour, IDamageable
     }
     #endregion
     
-    #region ManaRelated
+    #region ManaRelated ###
     
+    public void StartRegenerateMana()
+    {
+        _isManaRegenBlocked = false;
+    }
     private void RegenerateMana(){
         if(!_isManaRegenBlocked&&currentMana < maxMana){
             currentMana += _manaRegen;
@@ -107,6 +111,13 @@ public class PlayerManager : MonoBehaviour, IDamageable
             manaBar.Decrease(val);
         }
         return ManaCheck(val);
+    }
+    IEnumerator ManaDelay()
+    {
+        _isManaRegenBlocked = true;
+        yield return new WaitForSeconds(_manaCooldown);
+        _isManaRegenBlocked = false;
+        
     }
     #endregion
     #region Pickup

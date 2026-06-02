@@ -1,27 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class SkillIconControl : MonoBehaviour
 {
-    public SkillBar skill;
-    public SkillBar ulti;
-    
-    void Update()
+    public void SkillCooldown(SkillBar skill)
     {
-        SkillControl();
-    }
-    private void SkillControl()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            
+            if (skill.isCD == false)
             skill.StartCD();
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ulti.StartCD();
-        }
+    }
+    public bool CheckCoolDown(SkillBar skill)
+    {
+        return skill.isCD;
     }
 }

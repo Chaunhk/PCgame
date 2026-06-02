@@ -14,11 +14,14 @@ public class Canon : Bullet
     [SerializeField] private float _costDelay;
     [SerializeField] private int _aciveCost;
     [SerializeField] private GameObject fire;
+    [SerializeField] private SkillIconControl skillIcon;
+    [SerializeField] private SkillBar skillBar;
     private int _usageCost;
     
     //public void UpdateFire(Vector2 mousePosition){}
     public void EnableFire(Transform bTransform){
-        if(playerManager.ManaCheck(_aciveCost)){
+        if(playerManager.ManaCheck(_aciveCost)&&!skillIcon.CheckCoolDown(skillBar)){
+            skillIcon.SkillCooldown(skillBar);
             transform.position = bTransform.position;
             transform.rotation = bTransform.rotation;
             playerManager.ConsumeMana(_aciveCost);
@@ -28,7 +31,6 @@ public class Canon : Bullet
         }
     }
     public void DisableFire(){
-        //_hitbox.SetActive(false);
         
         playerManager.OnSkillEnd();
         

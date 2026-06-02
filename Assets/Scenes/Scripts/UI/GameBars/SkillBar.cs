@@ -6,11 +6,10 @@ using UnityEngine.UI;
 public class SkillBar : MonoBehaviour
 {
     public Image fill;
-    private float cdTime = 5f, currentFill = 1f;
+    private float cdTime = 5f, currentFill = 0;
     private float currentAmount;
     public bool isCD;
     private float timer = 0f;
-
     void Update()
     {
         // Check if the fill is not empty already
@@ -20,10 +19,10 @@ public class SkillBar : MonoBehaviour
         }
         else isCD = false;
     }
-    public void InitData(int maxValue)
+    public void InitData(int cdValue)
     {
-        cdTime = maxValue;
-        currentAmount = maxValue;
+        cdTime = cdValue;
+        currentAmount = cdValue;
         fill.fillAmount = 0;
         isCD = false;
     }
