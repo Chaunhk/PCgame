@@ -26,7 +26,7 @@ public class Canon : Bullet
             transform.rotation = bTransform.rotation;
             playerManager.ConsumeMana(_aciveCost);
             gameObject.SetActive(true);
-            playerManager.OnSkillStart();
+            playerManager.OnSkillEnd();
             //StartCoroutine(ManaDelay());
         }
     }

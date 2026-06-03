@@ -1822,7 +1822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &330895703
 Transform:
   m_ObjectHideFlags: 0
@@ -1836,6 +1836,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1041161491}
   - {fileID: 878783927}
   m_Father: {fileID: 1392794318}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1846,20 +1847,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330895702}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9c3ffd4402fbbc4484bd0651de233d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
+  playerManager: {fileID: 3075965679102231837}
   _lineRenderer: {fileID: 878783926}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 51
+    m_Bits: 64
   _hitbox: {fileID: 1041161490}
   _isActive: 0
   _isCostDelay: 0
   _costDelay: 1
+  skillIcon: {fileID: 693874104}
+  skillBar: {fileID: 2096326258}
 --- !u!1 &334226151
 GameObject:
   m_ObjectHideFlags: 0
@@ -5922,8 +5925,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1041161491}
+  m_Children: []
   m_Father: {fileID: 330895703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &917284773
@@ -6590,12 +6592,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041161490}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 878783927}
+  m_Father: {fileID: 330895703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1041161492
 BoxCollider2D:
@@ -18040,10 +18042,26 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1853372117}
+    - target: {fileID: 17271566693572790, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: _manaRegen
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 17271566693572790, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: _isUsingSkill
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1792842303843941446, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
       propertyPath: canon
       value: 
       objectReference: {fileID: 218902944}
+    - target: {fileID: 1792842303843941446, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: laser
+      value: 
+      objectReference: {fileID: 330895704}
+    - target: {fileID: 1792842303843941446, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: _chainHitDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3361741101364841006, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
       propertyPath: dropService
       value: 
@@ -18094,6 +18112,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7400969939793244292, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015407858962761275, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: m_Radius
+      value: 23.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015407858962761275, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

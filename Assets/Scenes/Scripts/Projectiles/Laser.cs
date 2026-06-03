@@ -12,6 +12,8 @@ public class Laser : GeneralProjectile
     [SerializeField] private bool _isActive;
     [SerializeField] private bool _isCostDelay;
     [SerializeField] private float _costDelay;
+    [SerializeField] private SkillIconControl skillIcon;
+    [SerializeField] private SkillBar skillBar;
     private int _aciveCost;
     private int _usageCost;
     protected override void Start()
@@ -27,7 +29,6 @@ public class Laser : GeneralProjectile
         Vector2 dir = mousePosition - (Vector2)shootPoint;
         RaycastHit2D hit = Physics2D.Raycast(shootPoint, dir.normalized, 50, _layerMask);
 
-        // ✅ Extend to default distance if nothing is hit
         float defaultDistance = 23f;
         Vector2 endPoint = hit ? hit.point : (Vector2)shootPoint + dir.normalized * defaultDistance;
         Vector3 endPoint3D = new Vector3(endPoint.x, endPoint.y, 0);
@@ -45,25 +46,30 @@ public class Laser : GeneralProjectile
         boxTransform.rotation = Quaternion.Euler(0, 0, rotZ);
         boxTransform.position = new Vector3(avgx, avgy, 0);
 
-        if (!_isCostDelay)
+        if (!_isCostDelay&&_isActive)
         {
             if (playerManager.ConsumeMana(_usageCost))
+            {
                 StartCoroutine(ManaDelay());
+            }
             else DisableLaser();
         }
     }
     public void EnableLaser(){
-        if(playerManager.ManaCheck(_aciveCost)){
+        if(playerManager.ManaCheck(_aciveCost)&&!skillIcon.CheckCoolDown(skillBar)&&!_isActive){
             playerManager.ConsumeMana(_aciveCost);
             _lineRenderer.enabled = true;
+            _isActive = true;
             _hitbox.SetActive(true);
             playerManager.OnSkillStart();
             StartCoroutine(ManaDelay());
         }
     }
     public void DisableLaser(){
+        _isActive = false;
         _lineRenderer.enabled = false;
         _hitbox.SetActive(false);
+        skillIcon.SkillCooldown(skillBar);
         playerManager.OnSkillEnd();
     }
     

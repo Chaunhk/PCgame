@@ -80,12 +80,13 @@ public class PlayerManager : MonoBehaviour, IDamageable
     }
     public void OnSkillStart(){
         _isUsingSkill = true;
-        StartCoroutine(SkillEndDelay());
+        _isManaRegenBlocked = true;
+        
     }
     public void OnSkillEnd()
     {
         _isUsingSkill = false;
-        
+        StartCoroutine(SkillEndDelay());
     }
 
     IEnumerator SkillEndDelay()
@@ -107,13 +108,13 @@ public class PlayerManager : MonoBehaviour, IDamageable
         }
         return ManaCheck(val);
     }
-    IEnumerator ManaDelay()
-    {
-        _isManaRegenBlocked = true;
-        yield return new WaitForSeconds(_manaCooldown);
-        _isManaRegenBlocked = false;
+    // IEnumerator ManaDelay()
+    // {
+    //     _isManaRegenBlocked = true;
+    //     yield return new WaitForSeconds(_manaCooldown);
+    //     _isManaRegenBlocked = false;
         
-    }
+    // }
     #endregion
     #region Pickup
     void OnTriggerEnter2D(Collider2D collision)

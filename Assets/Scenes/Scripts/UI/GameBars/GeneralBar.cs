@@ -10,19 +10,10 @@ public class GeneralBar : MonoBehaviour
     public bool isDec;
     void FixedUpdate()
     {
-        if (!isDec)
-        {
-            return;
-        }
-
-        if (fill.fillAmount > (float)currentAmount / (float)maxAmount)
-        {
-            DecAction();
-        }
-        else
-        {
-            isDec = false;
-        }
+        
+        if (!isDec) return;
+        DecAction();
+        
     }
     public void InitData(int maxValue)
     {
@@ -65,6 +56,14 @@ public class GeneralBar : MonoBehaviour
     }
     private void DecAction()
     {
-        fill.fillAmount -= Time.deltaTime / 5;
+        // Chase the bar position instead of fixed speed
+        fill.fillAmount = Mathf.MoveTowards(fill.fillAmount, bar.fillAmount, Time.deltaTime * 0.2f);
+        
+        // Stop when close enough
+        if (Mathf.Abs(fill.fillAmount - bar.fillAmount) < 0.001f)
+        {
+            fill.fillAmount = bar.fillAmount;
+            isDec = false;
+        }
     }
 }

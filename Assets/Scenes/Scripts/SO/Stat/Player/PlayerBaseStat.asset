@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3d1a687d0f53c48b8d155d1cc42b06, type: 3}
   m_Name: PlayerBaseStat
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 8
   bodyRotatingSpeed: 300
   headRotatingSpeed: 0
   maxHealth: 4
   healthRegen: 2
   maxMana: 100
-  manaRegen: 10
+  manaRegen: 2
   attackRate: 1
-  damage: 3
-  multiHit: 4
+  damage: 1
+  multiHit: 2
   spCost: 20
-  spDamage: 3
+  spDamage: 1
