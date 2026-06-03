@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//unused
 public class GeneralBullet : MonoBehaviour
 {
     public enum BulletType

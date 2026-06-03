@@ -27,22 +27,23 @@ public class Canon : Bullet
             playerManager.ConsumeMana(_aciveCost);
             gameObject.SetActive(true);
             playerManager.OnSkillStart();
-            StartCoroutine(ManaDelay());
+            //StartCoroutine(ManaDelay());
         }
     }
-    public void DisableFire(){
+    // public void DisableFire(){
         
-        playerManager.OnSkillEnd();
+    //     playerManager.OnSkillEnd();
         
-    }
+    // }
     
-    IEnumerator ManaDelay()
-    {
-        _isCostDelay = true;
-        yield return new WaitForSeconds(_costDelay);
-        _isCostDelay = false;
+    // IEnumerator ManaDelay()
+    // {
+    //     _isCostDelay = true;
+    //     yield return new WaitForSeconds(_costDelay);
+    //     _isCostDelay = false;
+    //     //playerManager.OnSkillEnd();
         
-    }
+    // }
     public override void DisableBullet()
     {
         fire.transform.position = transform.position;

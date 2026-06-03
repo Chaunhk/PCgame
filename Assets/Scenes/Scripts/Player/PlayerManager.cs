@@ -22,27 +22,17 @@ public class PlayerManager : MonoBehaviour, IDamageable
     private void Start()
     {
         manager = GameManager.Instance;
-        //expManager = manager.expManager;
         _playerStat = manager.playerStat;
         InitStat();
-        //gameObject.SetActive(false);
+        StartCoroutine(RegenLoop());  
     }
-    private void Update()
-    {
-        RegenerateMana();
-    }
-    private void FixedUpdate()
-    {
-        // if(!_isUsingSkill&&_manaCooldown>0)
-        //     _manaCooldown-=Time.deltaTime;
-        // if(_manaCooldown<=0)
-        //     _isManaRegenBlocked = false;
-    }
+
     #region Initialize
     private void InitStat()
     {
         maxHealth = _playerStat.maxHealth;
         maxMana = _playerStat.maxMana;
+        _manaRegen = _playerStat.manaRegen;
         currentHealth = maxHealth;
         currentMana = maxMana;
         _isUsingSkill = false;
@@ -73,31 +63,36 @@ public class PlayerManager : MonoBehaviour, IDamageable
     }
     #endregion
     
-    #region ManaRelated ###
+    #region ManaRelated
     
-    public void StartRegenerateMana()
+    IEnumerator RegenLoop()
     {
-        _isManaRegenBlocked = false;
-    }
-    private void RegenerateMana(){
-        if(!_isManaRegenBlocked&&currentMana < maxMana){
-            currentMana += _manaRegen;
-            if (currentMana > maxMana) {
-                currentMana = maxMana;
-                _manaCooldown = -1;
+        while (true)
+        {
+            yield return new WaitForSeconds(_regenInterval);
+            
+            if (!_isManaRegenBlocked && currentMana < maxMana)
+            {
+                currentMana = Mathf.Min(currentMana + _manaRegen, maxMana);
+                manaBar.Increase(_manaRegen);
             }
-                
-            manaBar.Increase(_manaRegen);
-            _manaCooldown = _regenInterval;
-            _isManaRegenBlocked = true;
         }
     }
     public void OnSkillStart(){
         _isUsingSkill = true;
+        StartCoroutine(SkillEndDelay());
     }
-    public void OnSkillEnd(){
+    public void OnSkillEnd()
+    {
         _isUsingSkill = false;
-        _manaCooldown = _skillUsageBlock;
+        
+    }
+
+    IEnumerator SkillEndDelay()
+    {
+        _isManaRegenBlocked = true;
+        yield return new WaitForSeconds(_skillUsageBlock);
+        _isManaRegenBlocked = false;
     }
     public bool ManaCheck(int val){
         if (val > currentMana){

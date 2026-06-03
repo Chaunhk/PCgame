@@ -12,7 +12,7 @@ public class ShootPointController : MonoBehaviour
     [SerializeField] private float _actionSpeed;
     [SerializeField] private float _chainHitDelay;
     [SerializeField] private Canon canon;
-    private Laser laser;
+    [SerializeField] private Laser laser;
     
     private void Start()
     {
@@ -25,7 +25,10 @@ public class ShootPointController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        // ✅ Force Z to 0 so it stays in 2D world space
+        Vector3 raw = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        _mousePos = new Vector3(raw.x, raw.y, 0);
+
         Vector3 rotation = _mousePos - transform.position;
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
@@ -40,18 +43,21 @@ public class ShootPointController : MonoBehaviour
         {
             StartCoroutine(ShootBurst());
         }
-        //Lase
+        if(Input.GetKeyDown(KeyCode.E)){
+            canon.EnableFire(transform);
+        }
+        //Laser
         if (laser!=null){
-            if(Input.GetKeyDown(KeyCode.E)){
-                //laser.EnableLaser();
-                canon.EnableFire(transform);
+            if(Input.GetKeyDown(KeyCode.Q)){
+                laser.EnableLaser();
+                //canon.EnableFire(transform);
             }
-            if (Input.GetKey(KeyCode.E)){
+            if (Input.GetKey(KeyCode.Q)){
                 //if laser wasn't active, contantly check if it can active then enable it asap
-                //laser.UpdateLaser(_mousePos);
+                laser.UpdateLaser(_mousePos);
             }
-            if(Input.GetKeyUp(KeyCode.E)){
-                //laser.DisableLaser();
+            if(Input.GetKeyUp(KeyCode.Q)){
+                laser.DisableLaser();
             }
         }
         

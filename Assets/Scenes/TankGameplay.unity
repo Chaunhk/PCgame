@@ -1072,6 +1072,8 @@ MonoBehaviour:
   _costDelay: 2
   _aciveCost: 10
   fire: {fileID: 1391226644}
+  skillIcon: {fileID: 693874104}
+  skillBar: {fileID: 976793727}
 --- !u!58 &218902946
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4822,8 +4824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0e5b5875987dd489fccb6a8e676983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 976793727}
-  ulti: {fileID: 2096326258}
 --- !u!1 &700490929
 GameObject:
   m_ObjectHideFlags: 0
@@ -5230,7 +5230,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.13
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -10971,7 +10971,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
