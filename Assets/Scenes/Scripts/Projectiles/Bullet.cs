@@ -6,14 +6,14 @@ public class Bullet : GeneralProjectile
 {
     [SerializeField] private float _bulletLife;
     [SerializeField] private float _speed;
-    [SerializeField] private bool _hasHit;
+    //[SerializeField] private bool _hasHit;
     private void Update()
     {
         transform.Translate(Vector3.right * _speed);
     }
     private void OnEnable()
     {
-        _hasHit = false;
+        //_hasHit = false;
         StartCoroutine(ActiveCycle(gameObject));
     }
     IEnumerator ActiveCycle(GameObject o)
@@ -31,7 +31,7 @@ public class Bullet : GeneralProjectile
                 damageable.Damage(manager.playerStat.damage);
                 
             }
-            _hasHit = true;
+            //_hasHit = true;
             DisableBullet();
             gameObject.SetActive(false);
         }

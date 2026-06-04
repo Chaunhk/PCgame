@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public GeneralBar expBar;
     [SerializeField] private int _manaRegen;
     [SerializeField] private float _manaCooldown,_regenInterval,_skillUsageBlock;
-    [SerializeField] private bool _isManaRegenBlocked,_isUsingSkill;
+    [SerializeField] private bool _isManaRegenBlocked;
     private void Start()
     {
         manager = GameManager.Instance;
@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
         _manaRegen = _playerStat.manaRegen;
         currentHealth = maxHealth;
         currentMana = maxMana;
-        _isUsingSkill = false;
+        //_isUsingSkill = false;
         // minDistance = manager.minDistance;
         // speed = enemyStat.speed;
         // dir = manager.player.transform.position - transform.position;
@@ -44,7 +44,29 @@ public class PlayerManager : MonoBehaviour, IDamageable
         //expManager.ResetExpBar();
     }
     #endregion
-    // todo: put hp regen here and make it work with upgrade
+    #region Upgrade
+    public void ApplyStatUpgrade()
+    {
+        // Health
+        int newMaxHealth = _playerStat.maxHealth;
+        int healthDiff = newMaxHealth - maxHealth;
+        maxHealth = newMaxHealth;
+        currentHealth = Mathf.Min(currentHealth + healthDiff, maxHealth);
+        healthBar.InitData(maxHealth);
+        healthBar.SetValue(currentHealth); // sync bar to actual current value
+
+        // Mana
+        int newMaxMana = _playerStat.maxMana;
+        int manaDiff = newMaxMana - maxMana;
+        maxMana = newMaxMana;
+        currentMana = Mathf.Min(currentMana + manaDiff, maxMana);
+        manaBar.InitData(maxMana);
+        manaBar.SetValue(currentMana);
+
+        // Mana regen
+        _manaRegen = _playerStat.manaRegen;
+    }
+    #endregion
     #region HP related 
     public void Damage(int damageAmount)
     {
@@ -79,13 +101,11 @@ public class PlayerManager : MonoBehaviour, IDamageable
         }
     }
     public void OnSkillStart(){
-        _isUsingSkill = true;
         _isManaRegenBlocked = true;
         
     }
     public void OnSkillEnd()
     {
-        _isUsingSkill = false;
         StartCoroutine(SkillEndDelay());
     }
 
@@ -119,7 +139,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     #region Pickup
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Got "+ collision.tag);
+        //Debug.Log("Got "+ collision.tag);
         if (collision.CompareTag("Exp"))
         {
             ExpBehavior exp = collision.GetComponent<ExpBehavior>();

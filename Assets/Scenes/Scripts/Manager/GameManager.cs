@@ -63,11 +63,8 @@ public class GameManager : MonoBehaviour
         playerStat.damage = Mathf.Min(playerStat.damage, playerStatCap.damage);
         playerStat.multiHit = Mathf.Min(playerStat.multiHit,playerStatCap.multiHit);
         playerStat.spCost = Mathf.Max(playerStat.spCost, playerStatCap.spCost);
+        playerStat.spMod = Mathf.Max(playerStat.spMod, playerStatCap.spMod);
         playerStat.spDamage = Mathf.Min(playerStat.spDamage, playerStatCap.spDamage);
     }
 }
 
-//sumary:
-//make laser minus mana imidiately instead if 1s delay
-//spawn counter doesn't work properly which lead to level ends early
-//

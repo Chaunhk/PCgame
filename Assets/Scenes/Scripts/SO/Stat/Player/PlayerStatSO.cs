@@ -21,7 +21,8 @@ public class PlayerStatSO : ScriptableObject
     public float attackRate; 
     public int damage;
     public int multiHit;
-    public float spCost;
+    public float spMod;
+    public int spCost;
     public int spDamage;
     public void SetStat(PlayerStatSO stat){
         moveSpeed = stat.moveSpeed;
@@ -33,6 +34,7 @@ public class PlayerStatSO : ScriptableObject
         damage = stat.damage;
         multiHit = stat.multiHit;
         spCost = stat.spCost;
+        spMod = stat.spMod;
         spDamage = stat.spDamage;
     }
 }

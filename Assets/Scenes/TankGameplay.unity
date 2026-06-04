@@ -171,7 +171,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &13414021
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -308,7 +307,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &31682479
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -515,7 +513,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &104932986
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -652,7 +649,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &108735276
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -926,7 +922,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &176229985
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1063,7 +1058,6 @@ MonoBehaviour:
   playerManager: {fileID: 3075965679102231837}
   _bulletLife: 2
   _speed: 0.2
-  _hasHit: 0
   _layerMask:
     serializedVersion: 2
     m_Bits: 71
@@ -1267,7 +1261,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &265170719
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1444,7 +1437,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &288287082
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1581,7 +1573,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &307533919
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1718,7 +1709,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &313936863
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1987,7 +1977,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &334260230
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2124,7 +2113,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &340841108
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2261,7 +2249,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &356816055
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2475,7 +2462,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &412115980
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2687,7 +2673,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &445492837
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2824,7 +2809,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &468136414
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3008,7 +2992,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &484609898
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3145,7 +3128,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &513274806
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3405,7 +3387,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &554005858
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3542,7 +3523,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &558108068
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3755,7 +3735,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &569017981
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3892,7 +3871,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &571575959
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4187,7 +4165,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &603225314
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4512,7 +4489,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &640606410
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4680,7 +4656,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &663299262
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4876,7 +4851,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &700490932
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5044,7 +5018,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &728061556
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5374,7 +5347,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!1 &795760703
 GameObject:
   m_ObjectHideFlags: 0
@@ -5424,7 +5396,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &795760706
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5636,7 +5607,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &862288755
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6070,7 +6040,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &923381608
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6285,7 +6254,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &934211254
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6422,7 +6390,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &968080215
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6751,7 +6718,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1106509755
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6964,7 +6930,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1146985655
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7101,7 +7066,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1157419637
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7473,7 +7437,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1294881917
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7686,7 +7649,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1362448007
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7873,9 +7835,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 3075965679102231837}
-  _bulletLife: 10
+  _bulletLife: 4
   _speed: 0
-  _hasHit: 0
 --- !u!58 &1391226648
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8060,7 +8021,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1394291315
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8197,7 +8157,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1397250877
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8365,7 +8324,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1429023441
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8502,7 +8460,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1436075262
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -8882,7 +8839,7 @@ MonoBehaviour:
   upgradeCards: []
   hpUpgradeCard: {fileID: 1106697250389485275, guid: dc6b56a055e0ee541a060d8059da0a2c, type: 3}
   mpUpgradeCard: {fileID: 2430687486100220561, guid: 782a42cc1da404641bfe88c988d0a0c2, type: 3}
-  laserUpgradeCard: {fileID: 3974199118957674309, guid: a29a3d1abb56c384fb1c81309060eb7c, type: 3}
+  skillUpgradeCard: {fileID: 3974199118957674309, guid: a29a3d1abb56c384fb1c81309060eb7c, type: 3}
   attackUpgradeCard: {fileID: 5292810568230248200, guid: 144b1bc475ff4ce4eb39b0a5f859c662, type: 3}
   randomUpgrades: []
 --- !u!114 &1549918518
@@ -9143,7 +9100,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1587190258
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9280,7 +9236,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1590533218
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9417,7 +9372,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1591285151
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9554,7 +9508,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1595580182
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9691,7 +9644,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1595696208
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9828,7 +9780,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1601814364
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9965,7 +9916,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1602753212
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10102,7 +10052,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1610954677
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10239,7 +10188,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1644869141
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10451,7 +10399,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1664920370
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10740,7 +10687,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1689178851
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11103,7 +11049,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1757047519
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11240,7 +11185,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1816222628
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11408,7 +11352,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1828347742
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11545,7 +11488,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1852926590
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11982,7 +11924,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1943056751
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12119,7 +12060,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1945196252
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12331,7 +12271,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1958680203
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12468,7 +12407,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1959780543
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12605,7 +12543,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &1994491800
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17051,7 +16988,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &2063153798
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17188,7 +17124,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &2077297019
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17585,7 +17520,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &2106092851
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17722,7 +17656,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &2119356750
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17859,7 +17792,6 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   _bulletLife: 2
   _speed: 0.1
-  _hasHit: 0
 --- !u!58 &2123880677
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18120,7 +18052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8015407858962761275, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

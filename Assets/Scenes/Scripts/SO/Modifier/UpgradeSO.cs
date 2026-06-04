@@ -1,30 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
 using GameDataStruct;
+using Unity.VisualScripting;
 using UnityEngine;
+
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Upgrade")]
 public class UpgradeSO : ScriptableObject
 {
-    // [Header("Basic Attack")]
-    // public float attackRate;
-    // public int attackDamage;
-    // [Header("Special Attack")]
-    // public int laserDamage;
-    // public int manaCostRecduction;
-    // [Header("Health")]
-    // public int maxHP;
-    // public int hpRegeneration;
-    // [Header("Mana")]
-    // public int maxMP;
-    // public int mpRegeneration;
     public List<UpgradeTemplate> upgrades;
-    // public float GetValueByName(string name){
-    //     foreach (var val in UpgradeSO)
-    // }
+
+    public float GetValueByName(string name)
+{
+    foreach (UpgradeTemplate upgrade in upgrades)
+    {
+        if (upgrade.name == name)
+            return upgrade.value;
+    }
+    Debug.LogWarning($"Upgrade '{name}' not found in UpgradeSO");
+    return 0f;
 }
-public enum UpgradeCatergory{
+}
+
+public enum UpgradeCatergory
+{
     BasicAttack,
-    Health,
     SpecialAttack,
+    Health,
     Mana
 }

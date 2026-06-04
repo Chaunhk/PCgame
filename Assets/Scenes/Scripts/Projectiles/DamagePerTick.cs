@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class DamagePerTick : GeneralProjectile
 {
-        [SerializeField] private float _bulletLife;
+    [SerializeField] private float _bulletLife;
     [SerializeField] private float _speed;
-    [SerializeField] private bool _hasHit;
+    //[SerializeField] private bool _hasHit;
     private void Update()
     {
         transform.Translate(Vector3.right * _speed);
     }
     private void OnEnable()
     {
-        _hasHit = false;
+        //_hasHit = false;
         StartCoroutine(ActiveCycle(gameObject));
     }
     IEnumerator ActiveCycle(GameObject o)
@@ -27,7 +27,7 @@ public class DamagePerTick : GeneralProjectile
         if (collision.CompareTag("Ground") || collision.CompareTag(tagDamage))
         {
             IDamageable damageable = collision.GetComponent<IDamageable>();
-            damageable?.Damage(manager.playerStat.damage);
+            damageable?.Damage(manager.playerStat.spDamage);
         }
     }
 }

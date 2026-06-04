@@ -10,7 +10,7 @@ public class LaserHitBox : GeneralProjectile
         if (collision.CompareTag("Ground") || collision.CompareTag(tagDamage))
         {
             IDamageable damageable = collision.GetComponent<IDamageable>();
-            damageable?.Damage(manager.playerStat.damage);
+            damageable?.Damage(manager.playerStat.spDamage);
         }
     }
 }

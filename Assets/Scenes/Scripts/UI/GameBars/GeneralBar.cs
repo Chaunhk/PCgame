@@ -36,6 +36,13 @@ public class GeneralBar : MonoBehaviour
     public void Increase(int val){
         IncreaseValue(maxAmount, currentAmount + val, val);
     }
+    public void SetValue(int value)
+    {
+        currentAmount = Mathf.Clamp(value, 0, maxAmount);
+        bar.fillAmount = (float)currentAmount / (float)maxAmount;
+        fill.fillAmount = bar.fillAmount;
+        UpdateBar();
+    }
     private void DecreaseValue(int maxAmountTm, int currentAmountTm, int decAmountTm)
     {
         maxAmount = maxAmountTm;

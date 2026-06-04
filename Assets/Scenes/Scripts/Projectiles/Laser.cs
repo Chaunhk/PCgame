@@ -21,6 +21,18 @@ public class Laser : GeneralProjectile
         base.Start();
         _aciveCost = (int)manager.playerStat.spCost;
         _usageCost = _aciveCost/2;
+        SetupLaserMaterial();
+
+    }
+    private void SetupLaserMaterial()
+    {
+        Material laserMat = new Material(Shader.Find("Sprites/Default"));
+        laserMat.color = new Color(1f, 0.3f, 0f, 0.8f); // orange-red
+
+        _lineRenderer.material = laserMat;
+        UpdateSize();
+        _lineRenderer.widthCurve = AnimationCurve.Constant(0f, 1f, 0.5f); // change 0.5f to whatever thickness you want
+        _lineRenderer.widthMultiplier = 1f;
     }
     public void UpdateLaser(Vector2 mousePosition)
     {
@@ -32,7 +44,7 @@ public class Laser : GeneralProjectile
         float defaultDistance = 23f;
         Vector2 endPoint = hit ? hit.point : (Vector2)shootPoint + dir.normalized * defaultDistance;
         Vector3 endPoint3D = new Vector3(endPoint.x, endPoint.y, 0);
-
+        
         _lineRenderer.SetPosition(0, shootPoint);
         _lineRenderer.SetPosition(1, endPoint3D);
 
@@ -58,12 +70,20 @@ public class Laser : GeneralProjectile
     public void EnableLaser(){
         if(playerManager.ManaCheck(_aciveCost)&&!skillIcon.CheckCoolDown(skillBar)&&!_isActive){
             playerManager.ConsumeMana(_aciveCost);
+            UpdateSize();
+            float pulse = 0.8f + Mathf.Sin(Time.time * 10f) * 0.2f;
+            _lineRenderer.material.color = new Color(1f, 0.3f, 0f, pulse);
             _lineRenderer.enabled = true;
             _isActive = true;
             _hitbox.SetActive(true);
             playerManager.OnSkillStart();
             StartCoroutine(ManaDelay());
         }
+    }
+    private void UpdateSize()
+    {
+        float mod = manager.playerStat.spMod;
+        _lineRenderer.widthMultiplier = 0.1f * mod;
     }
     public void DisableLaser(){
         _isActive = false;

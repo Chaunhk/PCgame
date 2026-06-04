@@ -22,5 +22,6 @@ MonoBehaviour:
   attackRate: 1
   damage: 1
   multiHit: 2
+  spMod: 1
   spCost: 20
   spDamage: 1

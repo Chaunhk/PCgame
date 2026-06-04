@@ -16,7 +16,7 @@ public class Canon : Bullet
     [SerializeField] private GameObject fire;
     [SerializeField] private SkillIconControl skillIcon;
     [SerializeField] private SkillBar skillBar;
-    private int _usageCost;
+    //private int _usageCost;
     
     //public void UpdateFire(Vector2 mousePosition){}
     public void EnableFire(Transform bTransform){
@@ -24,6 +24,7 @@ public class Canon : Bullet
             skillIcon.SkillCooldown(skillBar);
             transform.position = bTransform.position;
             transform.rotation = bTransform.rotation;
+            //fire.transform.localScale *=manager.playerStat.spMod;
             playerManager.ConsumeMana(_aciveCost);
             gameObject.SetActive(true);
             playerManager.OnSkillEnd();
