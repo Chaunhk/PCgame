@@ -21,10 +21,10 @@ public class UpgradeGeneration : MonoBehaviour
 
     public Dictionary<string, List<string>> allUpgrades = new Dictionary<string, List<string>>()
     {
-        { "BasicAttack",   new List<string> { "attackRate", "attackDamage", "multiHit" } },
-        { "SpecialAttack", new List<string> { "laserDamage", "manaCostRecduction" } },
-        { "Health",        new List<string> { "maxHP", "hpRegeneration" } },
-        { "Mana",          new List<string> { "maxMP", "mpRegeneration" } }
+        { "BasicAttack",   new List<string> { "Attack Speed", "Attack Damage", "Hit Count" } },
+        { "SpecialAttack", new List<string> { "Skill Damage", "Cost Recduction" , "Area Modifier" } },
+        { "Health",        new List<string> { "Max Health", "Health Regen" } },
+        { "Mana",          new List<string> { "Max Mana", "Mana Regen" } }
     };
 
     private void Start()
@@ -103,31 +103,34 @@ public class UpgradeGeneration : MonoBehaviour
         {
             switch (name)
             {
-                case "attackRate":
+                case "Attack Speed":
                     button.onClick.AddListener(() => UpgradeAttackSpeed(val));
                     break;
-                case "attackDamage":
+                case "Attack Damage":
                     button.onClick.AddListener(() => UpgradeAttack(val));
                     break;
-                case "multiHit":
+                case "Hit Count":
                     button.onClick.AddListener(() => UpgradeMultiHit(val));
                     break;
-                case "laserDamage":
+                case "Skill Damage":
                     button.onClick.AddListener(() => UpgradeSPAttack(val));
                     break;
-                case "manaCostRecduction":
+                case "Area Modifier":
+                    button.onClick.AddListener(() => UpgradeSPMod(val));
+                    break;
+                case "Cost Recduction":
                     button.onClick.AddListener(() => UpgradeManaCost(val));
                     break;
-                case "maxHP":
+                case "Max Health":
                     button.onClick.AddListener(() => UpgradeHP(val));
                     break;
-                case "hpRegeneration":
+                case "Health Regen":
                     button.onClick.AddListener(() => UpgradeHPRegen(val));
                     break;
-                case "maxMP":
+                case "Max Mana":
                     button.onClick.AddListener(() => UpgradeMP(val));
                     break;
-                case "mpRegeneration":
+                case "Mana Regen":
                     button.onClick.AddListener(() => UpgradeMPRegen(val));
                     break;
                 default:
@@ -143,6 +146,7 @@ public class UpgradeGeneration : MonoBehaviour
     public void UpgradeAttack(float val)        { manager.playerStat.damage += (int)val; }
     public void UpgradeAttackSpeed(float val)   { manager.playerStat.attackRate -= val; }
     public void UpgradeSPAttack(float val)      { manager.playerStat.spDamage += (int)val; }
+    public void UpgradeSPMod(float val)      { manager.playerStat.spMod *= val; }
     public void UpgradeManaCost(float val)      { manager.playerStat.spCost -= (int)val; }
     public void UpgradeHP(float val)            { manager.playerStat.maxHealth += (int)val; }
     public void UpgradeHPRegen(float val)       { manager.playerStat.healthRegen += (int)val; }

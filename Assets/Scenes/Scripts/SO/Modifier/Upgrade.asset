@@ -22,7 +22,7 @@ MonoBehaviour:
   - name: multiHit
     catergory: 0
     value: 1
-  - name: laserDamage
+  - name: skillDamage
     catergory: 2
     value: 2
   - name: manaCostRecduction
@@ -40,3 +40,6 @@ MonoBehaviour:
   - name: mpRegeneration
     catergory: 3
     value: 3
+  - name: skillMod
+    catergory: 1
+    value: 1.2

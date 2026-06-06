@@ -25,7 +25,7 @@ public class ShootPointController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        // ✅ Force Z to 0 so it stays in 2D world space
+        
         Vector3 raw = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
         _mousePos = new Vector3(raw.x, raw.y, 0);
 
@@ -76,15 +76,16 @@ public class ShootPointController : MonoBehaviour
         }
     }
     private IEnumerator ShootBurst() {
-    _actionDelay = true;
-    int hits = _manager.playerStat.multiHit;
-    for (int i = 0; i < hits; i++) {
-        SpawnBullet();
-        yield return new WaitForSeconds(_chainHitDelay);
-    }
+        _actionDelay = true;
+        int hits = _manager.playerStat.multiHit;
+        for (int i = 0; i < hits; i++) {
+            SpawnBullet();
+            yield return new WaitForSeconds(_chainHitDelay);
+        }
 
-    yield return new WaitForSeconds(_actionSpeed); // cooldown after burst
-    _actionDelay = false;
-}
+        yield return new WaitForSeconds(_actionSpeed); // cooldown after burst
+        _actionDelay = false;
+    }
+    
 }
 

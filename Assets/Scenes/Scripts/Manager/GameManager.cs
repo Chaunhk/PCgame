@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public UpgradeSO upgradeSO;
       // change this param into playerstatSO
     public GameObject[] listBullet;
+    public GameObject[] listFire;
     public GameObject laser;
     public int enemyCount;
     public bool isSpawnEnd;
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviour
         playerStat.damage = Mathf.Min(playerStat.damage, playerStatCap.damage);
         playerStat.multiHit = Mathf.Min(playerStat.multiHit,playerStatCap.multiHit);
         playerStat.spCost = Mathf.Max(playerStat.spCost, playerStatCap.spCost);
-        playerStat.spMod = Mathf.Max(playerStat.spMod, playerStatCap.spMod);
+        playerStat.spMod = Mathf.Min(playerStat.spMod, playerStatCap.spMod);
         playerStat.spDamage = Mathf.Min(playerStat.spDamage, playerStatCap.spDamage);
     }
 }

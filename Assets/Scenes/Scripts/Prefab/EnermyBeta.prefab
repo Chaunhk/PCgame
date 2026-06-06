@@ -423,7 +423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5229407841770151692
 Transform:
   m_ObjectHideFlags: 0
@@ -558,9 +558,9 @@ MonoBehaviour:
   currentHealth: 0
   speed: 0
   iframeDuration: 0.07
+  minDistance: 0
   isIframe: 0
   dir: {x: 0, y: 0, z: 0}
-  minDistance: 0
   enemyStat: {fileID: 11400000, guid: 3e17ef9f6b4a5ce4cb68becbecd2e4d6, type: 2}
   healthBar: {fileID: 5753772992504587076}
 --- !u!50 &7453275302060553999

@@ -34,7 +34,7 @@ public class GeneralBar : MonoBehaviour
         DecreaseValue(maxAmount, currentAmount - val, val);
     }
     public void Increase(int val){
-        IncreaseValue(maxAmount, currentAmount + val, val);
+        IncreaseValue(maxAmount, currentAmount + val);
     }
     public void SetValue(int value)
     {
@@ -51,7 +51,7 @@ public class GeneralBar : MonoBehaviour
         isDec = true;
         UpdateBar();
     }
-    private void IncreaseValue(int maxAmountTm, int currentAmountTm, int decAmountTm){
+    private void IncreaseValue(int maxAmountTm, int currentAmountTm){
         maxAmount = maxAmountTm;
         currentAmount = currentAmountTm;
         UpdateBar();

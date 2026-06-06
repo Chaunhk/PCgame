@@ -13,6 +13,7 @@ public class Canon : Bullet
     [SerializeField] private bool _isCostDelay;
     [SerializeField] private float _costDelay;
     [SerializeField] private int _aciveCost;
+    [SerializeField] private float baseSize;
     [SerializeField] private GameObject fire;
     [SerializeField] private SkillIconControl skillIcon;
     [SerializeField] private SkillBar skillBar;
@@ -47,6 +48,19 @@ public class Canon : Bullet
     // }
     public override void DisableBullet()
     {
+        float scale = manager.playerStat.spMod*baseSize;
+        //Debug.Log("current size = " + scale);
+        foreach (GameObject fire in manager.listFire)
+        {
+            if (!fire.activeSelf)
+            {
+                fire.transform.position = transform.position;
+                fire.transform.localScale = new Vector3(scale,scale,1);
+                fire.SetActive(true);
+                break;
+            }
+        }
+
         fire.transform.position = transform.position;
         fire.SetActive(true);
     }

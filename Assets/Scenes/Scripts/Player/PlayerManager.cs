@@ -16,15 +16,15 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public GeneralBar healthBar;
     public GeneralBar manaBar;
     public GeneralBar expBar;
-    [SerializeField] private int _manaRegen;
-    [SerializeField] private float _manaCooldown,_regenInterval,_skillUsageBlock;
-    [SerializeField] private bool _isManaRegenBlocked;
+    [SerializeField] private int _manaRegen,_healthRegen;
+    [SerializeField] private float _manaCooldown,_regenInterval,_skillUsageBlock,damagedBlock;
+    [SerializeField] private bool _isManaRegenBlocked,_isHealthRegenBlocked;
     private void Start()
     {
         manager = GameManager.Instance;
         _playerStat = manager.playerStat;
         InitStat();
-        StartCoroutine(RegenLoop());  
+        StartCoroutine(ManaRegenLoop());  
     }
 
     #region Initialize
@@ -32,16 +32,12 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         maxHealth = _playerStat.maxHealth;
         maxMana = _playerStat.maxMana;
+        _healthRegen = _playerStat.healthRegen;
         _manaRegen = _playerStat.manaRegen;
         currentHealth = maxHealth;
         currentMana = maxMana;
-        //_isUsingSkill = false;
-        // minDistance = manager.minDistance;
-        // speed = enemyStat.speed;
-        // dir = manager.player.transform.position - transform.position;
         healthBar.InitData(maxHealth);
         manaBar.InitData(maxMana);
-        //expManager.ResetExpBar();
     }
     #endregion
     #region Upgrade
@@ -68,6 +64,25 @@ public class PlayerManager : MonoBehaviour, IDamageable
     }
     #endregion
     #region HP related 
+    IEnumerator HealthRegenLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(_regenInterval);
+            
+            if (!_isHealthRegenBlocked && currentHealth < maxHealth)
+            {
+                currentHealth = Mathf.Min(currentHealth + _healthRegen, maxHealth);
+                healthBar.Increase(_healthRegen);
+            }
+        }
+    }
+    IEnumerator DamagedDelay()
+    {
+        _isHealthRegenBlocked = true;
+        yield return new WaitForSeconds(damagedBlock);
+        _isHealthRegenBlocked = false;
+    }
     public void Damage(int damageAmount)
     {
         currentHealth -= damageAmount;
@@ -87,7 +102,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     
     #region ManaRelated
     
-    IEnumerator RegenLoop()
+    IEnumerator ManaRegenLoop()
     {
         while (true)
         {

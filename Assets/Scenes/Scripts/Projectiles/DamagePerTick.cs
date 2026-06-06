@@ -5,12 +5,13 @@ using UnityEngine;
 public class DamagePerTick : GeneralProjectile
 {
     [SerializeField] private float _bulletLife;
-    [SerializeField] private float _speed;
+    //Re-Enable these if i ever need moving fires
+    //[SerializeField] private float _speed;
     //[SerializeField] private bool _hasHit;
-    private void Update()
-    {
-        transform.Translate(Vector3.right * _speed);
-    }
+    // private void Update()
+    // {
+    //     //transform.Translate(Vector3.right * _speed);
+    // }
     private void OnEnable()
     {
         //_hasHit = false;
