@@ -17307,6 +17307,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3361741101364841006, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361741101364841006, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
       propertyPath: showGizmos
       value: 1
       objectReference: {fileID: 0}

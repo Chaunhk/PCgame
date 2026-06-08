@@ -13,33 +13,33 @@ MonoBehaviour:
   m_Name: Upgrade
   m_EditorClassIdentifier: 
   upgrades:
-  - name: attackRate
+  - name: Attack Speed
     catergory: 0
     value: 0.2
-  - name: attackDamage
+  - name: Attack Damage
     catergory: 0
     value: 1
-  - name: multiHit
+  - name: Hit Count
     catergory: 0
     value: 1
-  - name: skillDamage
+  - name: Skill Damage
     catergory: 2
     value: 2
-  - name: manaCostRecduction
+  - name: Cost Recduction
     catergory: 2
     value: 2
-  - name: maxHP
+  - name: Max Health
     catergory: 1
     value: 5
-  - name: hpRegeneration
+  - name: Health Regen
     catergory: 1
     value: 2
-  - name: maxMP
+  - name: Max Mana
     catergory: 3
     value: 10
-  - name: mpRegeneration
+  - name: Mana Regen
     catergory: 3
     value: 3
-  - name: skillMod
+  - name: Area Modifier
     catergory: 1
     value: 1.2
