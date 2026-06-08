@@ -9026,21 +9026,6 @@ MonoBehaviour:
   - {fileID: 663299259}
   - {fileID: 569017978}
   - {fileID: 2123880674}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   listFire:
   - {fileID: 1391226644}
   - {fileID: 193350074}
@@ -17322,6 +17307,18 @@ PrefabInstance:
       propertyPath: enemyPrefab
       value: 
       objectReference: {fileID: 1484121854}
+    - target: {fileID: 3361741101364841006, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: enemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361741101364841006, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: enemyPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 5899645984404666017, guid: f6dd40d21b4101049b60c4fa88cff92b, type: 3}
+    - target: {fileID: 3361741101364841006, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      propertyPath: enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 9002422006265883002, guid: 758f29dcdbbad914cbf4fc0361ccb1f5, type: 3}
     - target: {fileID: 4414356840055814065, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
       propertyPath: m_Name
       value: PlayerProto

@@ -2,78 +2,88 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+
 public class MobPoolManager : MonoBehaviour
 {
     private GameObject player;
     private GameManager manager;
     public float innerRadius;
     public float outerRadius;
-    public GameObject enemyPrefab;
-    private IObjectPool<GeneralEnemy> mobPool;
+    public List<GameObject> enemyPrefabs; // changed from single to list
+
+    private Dictionary<GameObject, IObjectPool<GeneralEnemy>> mobPools;
 
     [SerializeField] private DropService dropService;
 
-    void Start()
-{
-    manager = GameManager.Instance;
-    player = manager.player;
-
-    // Pre-create 500 mobs so there is no lag during gameplay
-    List<GeneralEnemy> tempPrewarmList = new List<GeneralEnemy>();
-    
-    for (int i = 0; i < 500; i++)
-    {
-        tempPrewarmList.Add(mobPool.Get());
-    }
-
-    // Immediately put them back so they are "Ready" in the pool
-    foreach (GeneralEnemy obj in tempPrewarmList)
-    {
-        mobPool.Release(obj);
-    }
-}
-
     void Awake()
     {
-        //dropService = manager.gameObject.GetComponent<DropService>();
-        mobPool = new ObjectPool<GeneralEnemy>(
-            createFunc: () =>
-            {
-                GameObject obj = Instantiate(enemyPrefab);
-                return obj.GetComponent<GeneralEnemy>();
-            },
+        mobPools = new Dictionary<GameObject, IObjectPool<GeneralEnemy>>();
 
-            actionOnGet: (enemy) =>
-            {
-                enemy.gameObject.SetActive(true);
-                enemy.Initialize(dropService, mobPool);
-            },
+        foreach (GameObject prefab in enemyPrefabs)
+        {
+            GameObject capturedPrefab = prefab;
 
-            actionOnRelease: (enemy) =>
-            {
-                enemy.gameObject.SetActive(false);
-            },
+            var pool = new ObjectPool<GeneralEnemy>(
+                createFunc: () =>
+                {
+                    GameObject obj = Instantiate(capturedPrefab);
+                    return obj.GetComponent<GeneralEnemy>();
+                },
+                actionOnGet: (enemy) =>
+                {
+                    enemy.gameObject.SetActive(true);
+                    enemy.Initialize(dropService, mobPools[capturedPrefab]);
+                },
+                actionOnRelease: (enemy) =>
+                {
+                    enemy.gameObject.SetActive(false);
+                },
+                actionOnDestroy: (enemy) =>
+                {
+                    Destroy(enemy.gameObject);
+                },
+                collectionCheck: false,
+                defaultCapacity: 500 / enemyPrefabs.Count,
+                maxSize: 1000 / enemyPrefabs.Count
+            );
 
-            actionOnDestroy: (enemy) =>
-            {
-                Destroy(enemy.gameObject);
-            },
+            mobPools.Add(capturedPrefab, pool);
+        }
+    }
 
-            collectionCheck: false,
-            defaultCapacity: 500,
-            maxSize: 1000
-        );
+    void Start()
+    {
+        manager = GameManager.Instance;
+        player = manager.player;
+
+        // Prewarm each pool evenly
+        int prewarmPerPool = 500 / enemyPrefabs.Count;
+
+        foreach (var kvp in mobPools)
+        {
+            List<GeneralEnemy> temp = new List<GeneralEnemy>();
+
+            for (int i = 0; i < prewarmPerPool; i++)
+                temp.Add(kvp.Value.Get());
+
+            foreach (GeneralEnemy obj in temp)
+                kvp.Value.Release(obj);
+        }
     }
 
     public void SpawnMob(Vector3 position)
     {
-        GeneralEnemy mob = mobPool.Get();
+        // Pick a random prefab and get from its pool
+        int randomIndex = Random.Range(0, enemyPrefabs.Count);
+        GameObject randomPrefab = enemyPrefabs[randomIndex];
+
+        GeneralEnemy mob = mobPools[randomPrefab].Get();
         mob.transform.position = position;
     }
 
     public void KillMob(GeneralEnemy mob)
     {
-        mobPool.Release(mob);
+        mob.DeSpawn();
     }
     public Vector3 GetRandomSpawnPoint()
     {
