@@ -53,7 +53,7 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector2 dir = (target.position - transform.position).normalized;
 
-        rb.velocity = enemy.speed * dir; 
+        rb.linearVelocity = enemy.speed * dir; 
     }
     public void SetPath (List<SubPoint> newpath){
         path.Clear();
