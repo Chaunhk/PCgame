@@ -54,6 +54,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -105,17 +108,20 @@ MonoBehaviour:
   currentHealth: 0
   maxMana: 0
   currentMana: 0
+  basePickUp: 1
   pickUpRadius: 0
   manager: {fileID: 0}
   healthBar: {fileID: 0}
   manaBar: {fileID: 0}
   expBar: {fileID: 0}
   _manaRegen: 8
+  _healthRegen: 0
   _manaCooldown: 0
   _regenInterval: 1
   _skillUsageBlock: 3
+  damagedBlock: 0
   _isManaRegenBlocked: 0
-  _isUsingSkill: 1
+  _isHealthRegenBlocked: 0
 --- !u!114 &2179107678276952652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +145,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3075965677603850245}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -162,9 +169,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
   m_Radius: 14
 --- !u!114 &4537629593259911107
 MonoBehaviour:
@@ -180,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   innerRadius: 20
   outerRadius: 30
-  enemyPrefab: {fileID: 0}
+  enemyPrefabs: []
   dropService: {fileID: 0}
   spawnInterval: 1
   showGizmos: 1
@@ -234,6 +241,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -318,6 +328,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -405,3 +418,6 @@ MonoBehaviour:
   _actionDelay: 0
   _actionSpeed: 0
   _chainHitDelay: 0
+  canon: {fileID: 0}
+  laser: {fileID: 0}
+  _bulletPrefab: {fileID: 3875513424055379502, guid: d18c1a344924c634f99955b9bc7006b6, type: 3}
