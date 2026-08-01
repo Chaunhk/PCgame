@@ -102,8 +102,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
         _isHealthRegenBlocked = false;
     }
-    public void Damage(int damageAmount)
+    public void Damage(DamagePacket packet)
     {
+        int damageAmount = packet.Amount;
         currentHealth -= damageAmount;
         healthBar.Decrease(damageAmount);
         if (currentHealth <= 0)

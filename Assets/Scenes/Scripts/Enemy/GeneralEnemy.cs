@@ -65,12 +65,18 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(int damageAmount)
+    // WHY: invulnerability frames used to block EVERY kind of damage, and any hit started them.
+    // A burning zone ticking on a target that is also being shot had almost all of its ticks
+    // swallowed — the fire kit is built on burn zones, so its upgrades would have felt like they
+    // did nothing, for a reason no playtest would surface. Burn is rate-limited by its own tick
+    // interval and does not need contact immunity; only Direct hits do.
+    public void Damage(DamagePacket packet)
     {
-        if (isIframe) return;
+        bool respectsIframe = packet.Tag == DamageTag.Direct;
+        if (respectsIframe && isIframe) return;
 
-        currentHealth -= damageAmount;
-        healthBar.Decrease(damageAmount);
+        currentHealth -= packet.Amount;
+        healthBar.Decrease(packet.Amount);
 
         if (currentHealth <= 0)
         {
@@ -78,7 +84,7 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
             return;
         }
 
-        StartCoroutine(ImuneToDamage());
+        if (respectsIframe) StartCoroutine(ImuneToDamage());
     }
 
     IEnumerator ImuneToDamage()

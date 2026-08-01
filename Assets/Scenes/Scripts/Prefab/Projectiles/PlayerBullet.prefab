@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8500027611328860281}
   - component: {fileID: 8075112462813605168}
   - component: {fileID: 1132568427610009196}
+  - component: {fileID: 4573227091883671009}
   m_Layer: 2
   m_Name: PlayerBullet
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3875513424055379502}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
@@ -153,3 +154,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifetime: 2
+--- !u!114 &4573227091883671009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3875513424055379502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36d336050fb97b41a05155fd405079c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
