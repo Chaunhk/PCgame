@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e499bc8f12a12ff43957cff71f480f27, type: 3}
+  m_Name: LaserBeam
+  m_EditorClassIdentifier: 
+  skillId: laser_beam
+  displayName: Laser Beam
+  description: 
+  icon: {fileID: 0}
+  role: 1
+  activation: 1
+  cooldown: 4
+  maxCharges: 1
+  manaCostOnActivate: 8
+  manaCostPerTick: 2
+  tickInterval: 0.2
+  behaviourPrefab: {fileID: 1011062974948784597, guid: 4a2ab6354dce628408e40159864faa7f, type: 3}
+  parameters:
+  - id: beamCount
+    label: Beams
+    tooltip: How many rays are fired at once, spread evenly around the aim direction.
+    type: 1
+    defaultValue: 1
+    min: 1
+    max: 9
+  - id: spreadAngle
+    label: Spread angle
+    tooltip: Degrees between neighbouring beams. Ignored when there is only one.
+    type: 0
+    defaultValue: 0
+    min: 0
+    max: 60
+  - id: range
+    label: Range
+    tooltip: How far each beam reaches, in world units.
+    type: 0
+    defaultValue: 14
+    min: 1
+    max: 40
+  - id: width
+    label: Beam width
+    tooltip: Visual thickness of the beam, before the global area modifier.
+    type: 0
+    defaultValue: 0.25
+    min: 0.02
+    max: 2
+  - id: damagePerTick
+    label: Damage per tick
+    tooltip: Damage each target takes per tick. A target crossed by several beams
+      is still only hit once per tick.
+    type: 1
+    defaultValue: 6
+    min: 0
+    max: 200
+  - id: tickInterval
+    label: Tick interval
+    tooltip: Seconds between damage ticks while the beam is held.
+    type: 3
+    defaultValue: 0.2
+    min: 0.05
+    max: 1
+  scalesWithSpDamage: 1
+  scalesWithSpArea: 1
+  scalesWithSpCost: 1

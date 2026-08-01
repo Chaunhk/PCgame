@@ -15,4 +15,5 @@ MonoBehaviour:
   tanks:
   - {fileID: 11400000, guid: 044f38d32840cac4b9db151b23af0118, type: 2}
   - {fileID: 11400000, guid: 76f10ce219e206a479c595f90a1b677e, type: 2}
+  - {fileID: 11400000, guid: 1640d13601e8c76438748983482133b0, type: 2}
   defaultTankId: scout

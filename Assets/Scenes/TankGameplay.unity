@@ -2702,8 +2702,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de8b6301dfc17f439c4f0530b25430b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roster: {fileID: 11400000, guid: 6f63010698b4a8a43a119a0a9b3e9c08, type: 2}
-  _tankOverride: {fileID: 0}
   _spawnPoint: {fileID: 0}
   _placeholder: {fileID: 3075965679102231836}
   _healthBar: {fileID: 1853372117}
@@ -3120,6 +3118,8 @@ MonoBehaviour:
   shootPoint: {fileID: 5392226040706823487}
   upgradeSO: {fileID: 11400000, guid: e48e6833fb8c2d14194a6d7ab6d7946e, type: 2}
   projectilePool: {fileID: 1415910477}
+  tankRoster: {fileID: 11400000, guid: 6f63010698b4a8a43a119a0a9b3e9c08, type: 2}
+  selectedTank: {fileID: 0}
   laser: {fileID: 330895702}
   enemyCount: 0
   isSpawnEnd: 0

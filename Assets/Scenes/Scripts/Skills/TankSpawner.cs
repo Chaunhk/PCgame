@@ -13,10 +13,8 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class TankSpawner : MonoBehaviour
 {
-    [Header("Which tank")]
-    [SerializeField] private TankRosterSO _roster;
-    [Tooltip("Forces one tank, ignoring the roster and the player's choice. For testing.")]
-    [SerializeField] private TankDefinitionSO _tankOverride;
+    // WHY: which tank to bring is chosen on GameManager, not here. Two places to set the same thing
+    // is how you end up staring at a spawner that says Scout while the game runs Heavy.
 
     [Header("Where")]
     [Tooltip("Spawn position. Falls back to this object's own position.")]
@@ -41,10 +39,15 @@ public class TankSpawner : MonoBehaviour
             return;
         }
 
-        TankDefinitionSO tank = _tankOverride != null ? _tankOverride : TankSelection.Resolve(_roster);
+        // GameManager's explicit pick wins; otherwise the player's saved choice; otherwise the
+        // roster's default. A select screen only has to write the saved choice.
+        TankDefinitionSO tank = manager.selectedTank != null
+            ? manager.selectedTank
+            : TankSelection.Resolve(manager.tankRoster);
+
         if (tank == null)
         {
-            Debug.LogError($"{nameof(TankSpawner)}: no tank to spawn — the roster is empty or unassigned.");
+            Debug.LogError($"{nameof(TankSpawner)}: no tank to spawn. Set 'Selected Tank' or 'Tank Roster' on GameManager.");
             return;
         }
 

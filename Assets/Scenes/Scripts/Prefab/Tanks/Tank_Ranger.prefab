@@ -68,10 +68,10 @@ GameObject:
   - component: {fileID: 17271566693572790}
   - component: {fileID: 7032237358565607514}
   - component: {fileID: 8015407858962761275}
-  - component: {fileID: 1127925739888576064}
-  - component: {fileID: 645872232800346068}
+  - component: {fileID: 6629494184264642373}
+  - component: {fileID: 7440540360491914209}
   m_Layer: 0
-  m_Name: Tank_Scout
+  m_Name: Tank_Ranger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +230,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 14
---- !u!114 &1127925739888576064
+--- !u!114 &6629494184264642373
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,8 +244,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerManager: {fileID: 17271566693572790}
   _shootPoint: {fileID: 7894467359747278821}
-  _loadout: {fileID: 645872232800346068}
---- !u!114 &645872232800346068
+  _loadout: {fileID: 7440540360491914209}
+--- !u!114 &7440540360491914209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,7 +341,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

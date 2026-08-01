@@ -41,6 +41,17 @@ public class GameManager : MonoBehaviour
     // free one on every shot) are replaced by ProjectilePool, which is the same UnityEngine.Pool
     // shape MobPoolManager already uses for enemies.
     public ProjectilePool projectilePool;
+
+    [Header("Tank")]
+    [Tooltip("Every tank a player can pick.")]
+    public TankRosterSO tankRoster;
+    // WHY: one visible place to answer "which tank am I taking in?", rather than it being buried in
+    // a spawner component or in saved player prefs. Leaving it empty means the run uses whatever the
+    // player picked, and the roster's default if they never picked — which is what will happen once
+    // a select screen exists.
+    [Tooltip("Force a tank for this run. Leave empty to use the player's saved choice, then the roster default.")]
+    public TankDefinitionSO selectedTank;
+
     public GameObject laser;
     public int enemyCount;
     public bool isSpawnEnd;
