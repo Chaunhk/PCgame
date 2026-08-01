@@ -10,7 +10,12 @@ using UnityEngine;
 public class TankSkillLoadout : MonoBehaviour
 {
     [Header("Loadout")]
-    [SerializeField] private TankDefinitionSO _tank;
+    [Tooltip("Every tank the player can pick. The chosen one is used at run start.")]
+    [SerializeField] private TankRosterSO _roster;
+    [Tooltip("Forces one tank, ignoring the roster and the player's choice. For testing.")]
+    [SerializeField] private TankDefinitionSO _tankOverride;
+
+    private TankDefinitionSO _tank;
 
     [Header("Input")]
     // WHY: left mouse is taken by the basic attack, so slots bind to keyboard keys.
@@ -37,6 +42,10 @@ public class TankSkillLoadout : MonoBehaviour
 
     private void Start()
     {
+        // WHY: resolved before the context is built, because the tank supplies the baseline stats
+        // that every skill's numbers are measured against.
+        _tank = _tankOverride != null ? _tankOverride : TankSelection.Resolve(_roster);
+
         _manager = GameManager.Instance;
         if (_camera == null) _camera = _manager.mainCamera;
         if (_muzzle == null && _manager.shootPoint != null) _muzzle = _manager.shootPoint.transform;
