@@ -283,11 +283,47 @@ Steps 1, 2 and 6 are useful even if the whole slot system were rejected.
    separately?
 4. **"30~50%" — is that a designed range** (i.e. it becomes a tunable per skill) or a
    placeholder for one number to be picked later?
-5. **Does the Basic attack auto-fire on its 2s timer**, or does the player press to throw?
-   The current code fires on held mouse button with an attack-rate delay
-   (`Player/ShootPointController.cs:42-45`); a fixed 2s auto-throw is a different loop and
-   changes what "attack rate" upgrades mean.
-6. **Joystick direction implies a mobile / gamepad build.** Aim is currently read from the
-   mouse cursor (`ShootPointController.cs:29-34`). Should the aim source be abstracted now
-   (mouse / joystick / tank facing), or is mouse the shipping input and "joystick" just
-   shorthand for aim direction?
+5. ~~Does the Basic attack auto-fire, or does the player press to throw?~~ **Answered: it
+   auto-fires.** See §10.
+6. ~~Is "joystick direction" a real gamepad path, or shorthand for aim direction?~~
+   **Answered: move on the stick, aim with the mouse.** See §10.
+
+---
+
+## 10. Control scheme (answered by the owner)
+
+| Input | Controls | Current code |
+|---|---|---|
+| Movement stick / WASD | tank body moves, body turns toward movement | `Player/MovementController.cs:28-48` — already this |
+| Mouse cursor | aim: the turret and every skill point at the cursor | `Player/ShootPointController.cs:29-34` — already this |
+| — | **basic attack fires by itself** on its own timer | **not this yet** — see below |
+
+So the game is an auto-shooter with manual aim: the player steers and points, and never
+presses a fire button.
+
+**What has to change.** Shooting is currently gated on the mouse button being held
+(`ShootPointController.cs:42`). Auto-fire means dropping that gate and letting the
+attack-rate timer drive the loop on its own. Two consequences worth stating before it is
+built:
+
+- **"Attack rate" becomes the auto-fire interval**, i.e. the kit's "every 2 seconds". It is
+  no longer a floor on how fast a player can click, so the upgrade that improves it is now
+  strictly a rate change with no skill-expression component. That is the normal auto-shooter
+  trade and matches the kit as written — just confirming it is intended.
+- **The mouse button is now free.** If it stays unused, aiming is the only thing the mouse
+  does. Worth deciding whether one of the three slots binds to it (right or left click)
+  instead of a keyboard key — natural on this control scheme, and it is the difference
+  between reaching for `R` mid-dodge or not.
+
+**Aim source stays a single value, not a branch.** Because aim is the mouse and movement is
+the stick, `SkillContext.AimWorldPos` (`skill-plugin-system.md` §3.3) is the cursor
+position, resolved once per frame, and every skill reads it. The EX fire carpet's "along
+the joystick or current facing direction" therefore resolves to **the aim direction**, which
+is the same value — one source, no per-skill input branching. If a gamepad build ever
+happens, only the code that fills `AimWorldPos` changes; no skill is touched.
+
+One thing this makes cheap and worth doing now: keep aim in `Update`, not `FixedUpdate`
+(`skill-plugin-system.md` §5.4). With no fire button, aim *is* the player's entire moment
+to moment expression, and it currently updates at physics rate while the frame rate is
+higher — the turret visibly trails the cursor. That fix matters more under auto-fire than it
+did before.
