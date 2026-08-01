@@ -20,13 +20,21 @@ public class PlayerManager : MonoBehaviour, IDamageable
     [SerializeField] private int _manaRegen,_healthRegen;
     [SerializeField] private float _manaCooldown,_regenInterval,_skillUsageBlock,damagedBlock;
     [SerializeField] private bool _isManaRegenBlocked,_isHealthRegenBlocked;
+    private float _healthRegenResumeAt;
     private void Start()
     {
         manager = GameManager.Instance;
         _playerStat = manager.playerStat;
         pickUpRadius = basePickUp;
         InitStat();
-        StartCoroutine(ManaRegenLoop());  
+
+        // WHY: a regen interval of 0 makes WaitForSeconds yield every frame, which turns
+        // "regen per interval" into "regen per frame" and refills the bar instantly. The
+        // field is set in the inspector, so a fresh prefab or a reset component lands here.
+        if (_regenInterval <= 0f) _regenInterval = 1f;
+
+        StartCoroutine(ManaRegenLoop());
+        StartCoroutine(HealthRegenLoop());
     }
 
     #region Initialize
@@ -81,10 +89,17 @@ public class PlayerManager : MonoBehaviour, IDamageable
             }
         }
     }
+    // WHY: taking a second hit while this is already running must EXTEND the pause, not end it
+    // early. With a plain WaitForSeconds, the first coroutine's timer expires on schedule and
+    // clears the flag even though the player was hit again a moment ago, so regen resumes
+    // mid-fight. Tracking a deadline instead makes overlapping hits behave the obvious way.
     IEnumerator DamagedDelay()
     {
         _isHealthRegenBlocked = true;
-        yield return new WaitForSeconds(damagedBlock);
+        _healthRegenResumeAt = Mathf.Max(_healthRegenResumeAt, Time.time + damagedBlock);
+
+        while (Time.time < _healthRegenResumeAt) yield return null;
+
         _isHealthRegenBlocked = false;
     }
     public void Damage(int damageAmount)
@@ -96,7 +111,11 @@ public class PlayerManager : MonoBehaviour, IDamageable
             Dead();
             return;
         }
-        
+
+        // WHY: health regen mirrors mana regen — mana pauses while a skill is used, health
+        // pauses for a moment after being hit. DamagedDelay is what sets that pause, and it
+        // had no caller, so _isHealthRegenBlocked was never true and the pause never existed.
+        StartCoroutine(DamagedDelay());
     }
     public void Dead()
     {
@@ -140,12 +159,15 @@ public class PlayerManager : MonoBehaviour, IDamageable
         }
         else return true;
     }
+    // WHY: this used to spend and then return ManaCheck(val) — which answers "could I afford
+    // ANOTHER one?", not "did this spend succeed?". Laser trusts the return value to decide
+    // whether to keep the beam alive, so the beam cut out one full tick-cost early.
     public bool ConsumeMana(int val){
-        if(ManaCheck(val)){
-            currentMana -= val;
-            manaBar.Decrease(val);
-        }
-        return ManaCheck(val);
+        if(!ManaCheck(val)) return false;
+
+        currentMana -= val;
+        manaBar.Decrease(val);
+        return true;
     }
     // IEnumerator ManaDelay()
     // {

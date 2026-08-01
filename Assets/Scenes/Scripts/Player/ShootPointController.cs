@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class ShootPointController : MonoBehaviour
@@ -23,9 +22,12 @@ public class ShootPointController : MonoBehaviour
         _chainHitDelay = 0.1f;
         laser = _manager.laser.GetComponent<Laser>();
     }
-    private void FixedUpdate()
+    // WHY: aim used to be computed in FixedUpdate, which runs at the physics rate (50 Hz by
+    // default) while rendering and input run per frame. The turret visibly trailed the cursor,
+    // and anything reading _mousePos from Update — shooting, and the laser — aimed at a point
+    // up to one physics step stale. Aim is input, not physics, so it belongs here.
+    private void Aim()
     {
-        
         Vector3 raw = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
         _mousePos = new Vector3(raw.x, raw.y, 0);
 
@@ -35,8 +37,8 @@ public class ShootPointController : MonoBehaviour
     }
     private void Update()
     {
+        Aim();
         Shoot();
-        
     }
     private void Shoot(){
         if (Input.GetMouseButton(0) && !_actionDelay)

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class Laser : GeneralProjectile
@@ -14,6 +13,7 @@ public class Laser : GeneralProjectile
     [SerializeField] private float _costDelay;
     [SerializeField] private SkillIconControl skillIcon;
     [SerializeField] private SkillBar skillBar;
+    [SerializeField] private Material _laserMaterial;
     private int _aciveCost;
     private int _usageCost;
     protected override void Start()
@@ -24,9 +24,16 @@ public class Laser : GeneralProjectile
         SetupLaserMaterial();
 
     }
+    // WHY: this sourced its material from Shader.Find("Sprites/Default"), a by-name lookup that
+    // returns null in a player build unless something else already references that shader — the
+    // laser would then render magenta in a build while looking correct in the editor. Assign
+    // _laserMaterial in the inspector to bind a real asset; the lookup stays as a fallback so
+    // nothing breaks before the field is wired up.
     private void SetupLaserMaterial()
     {
-        Material laserMat = new Material(Shader.Find("Sprites/Default"));
+        Material laserMat = _laserMaterial != null
+            ? new Material(_laserMaterial)
+            : new Material(Shader.Find("Sprites/Default"));
         laserMat.color = new Color(1f, 0.3f, 0f, 0.8f); // orange-red
 
         _lineRenderer.material = laserMat;
