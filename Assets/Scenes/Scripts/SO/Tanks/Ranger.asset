@@ -24,5 +24,5 @@ MonoBehaviour:
     skill: {fileID: 11400000, guid: 2d7ac9b125cd40b43ae9eda612e650b5, type: 2}
     overrides: []
   exSlot:
-    skill: {fileID: 11400000, guid: b3ec83e9476e4a04aa9f5f4186fd48bb, type: 2}
+    skill: {fileID: 11400000, guid: f947c9eb93510594d9ec3afb8d0b2131, type: 2}
     overrides: []

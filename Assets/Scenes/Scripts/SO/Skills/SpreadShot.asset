@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e499bc8f12a12ff43957cff71f480f27, type: 3}
+  m_Name: SpreadShot
+  m_EditorClassIdentifier: 
+  skillId: spread_shot
+  displayName: Spread Shot
+  description: Fires a fan of ordinary bullets in one volley.
+  icon: {fileID: 0}
+  role: 2
+  activation: 0
+  cooldown: 8
+  maxCharges: 2
+  manaCostOnActivate: 18
+  manaCostPerTick: 0
+  tickInterval: 0.25
+  behaviourPrefab: {fileID: 3925522258599259221, guid: 2ae9f707c356b5342aa564faa0fcaab6, type: 3}
+  parameters:
+  - id: projectileCount
+    label: Bullets per volley
+    tooltip: How many ordinary bullets leave the muzzle at once, spread evenly around
+      the aim direction.
+    type: 1
+    defaultValue: 5
+    min: 1
+    max: 20
+  - id: spreadAngle
+    label: Spread angle
+    tooltip: Degrees between neighbouring bullets. Larger means a wider fan and thinner
+      coverage.
+    type: 0
+    defaultValue: 12
+    min: 0
+    max: 60
+  scalesWithSpDamage: 1
+  scalesWithSpArea: 1
+  scalesWithSpCost: 1
