@@ -9092,7 +9092,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9ad1ea9f1a5b4429dc05e18275db15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tank: {fileID: 11400000, guid: 76f10ce219e206a479c595f90a1b677e, type: 2}
+  _roster: {fileID: 11400000, guid: 6f63010698b4a8a43a119a0a9b3e9c08, type: 2}
+  _tankOverride: {fileID: 0}
   _subKey: 113
   _exKey: 101
   _basicMouseButton: 0
