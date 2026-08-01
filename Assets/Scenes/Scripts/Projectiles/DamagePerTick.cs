@@ -2,26 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// WHY: the lifetime coroutine that used to live here now belongs to PooledProjectile, so a
+// fire zone returns to the pool instead of just switching itself off — and its timer no longer
+// depends on a coroutine that dies with the object.
+[RequireComponent(typeof(PooledProjectile))]
 public class DamagePerTick : GeneralProjectile
 {
-    [SerializeField] private float _bulletLife;
-    //Re-Enable these if i ever need moving fires
-    //[SerializeField] private float _speed;
-    //[SerializeField] private bool _hasHit;
-    // private void Update()
-    // {
-    //     //transform.Translate(Vector3.right * _speed);
-    // }
-    private void OnEnable()
-    {
-        //_hasHit = false;
-        StartCoroutine(ActiveCycle(gameObject));
-    }
-    IEnumerator ActiveCycle(GameObject o)
-    {
-        yield return new WaitForSeconds(_bulletLife);
-        o.SetActive(false);
-    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         //Debug.Log("Hit"+ collision.tag);

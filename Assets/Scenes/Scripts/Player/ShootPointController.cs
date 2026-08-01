@@ -12,6 +12,7 @@ public class ShootPointController : MonoBehaviour
     [SerializeField] private float _chainHitDelay;
     [SerializeField] private Canon canon;
     [SerializeField] private Laser laser;
+    [SerializeField] private GameObject _bulletPrefab;
     
     private void Start()
     {
@@ -66,19 +67,11 @@ public class ShootPointController : MonoBehaviour
         
     }
     private void SpawnBullet(float angle = 0f){
-        
-        foreach (GameObject bullet in _manager.listBullet)
-        {
-            if (!bullet.activeSelf)
-            {
-                //Vector3 dir = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + angle) * Vector3.right;
-                bullet.transform.position = _manager.shootPoint.transform.position;
-                bullet.transform.rotation = transform.rotation;
-                bullet.transform.Rotate(0, 0, angle);
-                bullet.SetActive(true);
-                break;
-            }
-        }
+        // WHY: this used to scan listBullet for an inactive entry and simply do nothing when the
+        // array was exhausted — a shot that vanished with no bullet and no error. The pool grows
+        // instead, and says so in the console if the prefab was never registered.
+        Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, angle);
+        _manager.projectilePool.Spawn(_bulletPrefab, _manager.shootPoint.transform.position, rotation);
     }
     private IEnumerator ShootBurst() {
         _actionDelay = true;
