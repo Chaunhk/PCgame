@@ -29,6 +29,10 @@ public class TankDefinitionSO : ScriptableObject
     public string displayName;
     public Sprite portrait;
 
+    [Header("Body")]
+    [Tooltip("This tank's own prefab. Must carry a TankRig on its root.")]
+    public GameObject bodyPrefab;
+
     [Header("Base stats")]
     public PlayerStatSO baseStats;
 
