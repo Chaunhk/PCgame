@@ -2200,6 +2200,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fill: {fileID: 770167544}
   isCD: 0
+--- !u!1 &1004756814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1004756816}
+  - component: {fileID: 1004756815}
+  m_Layer: 0
+  m_Name: MobSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1004756815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004756814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08d83cfd9e14fc4385ea39ab71d718d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  innerRadius: 20
+  outerRadius: 30
+  enemyPrefabs:
+  - {fileID: 5899645984404666017, guid: f6dd40d21b4101049b60c4fa88cff92b, type: 3}
+  - {fileID: 9002422006265883002, guid: 758f29dcdbbad914cbf4fc0361ccb1f5, type: 3}
+  dropService: {fileID: 1549918520}
+  spawnInterval: 1
+  showGizmos: 1
+  circleSegments: 32
+--- !u!4 &1004756816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004756814}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1041161490
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,6 +2672,57 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 613354761}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1249891239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1249891241}
+  - component: {fileID: 1249891240}
+  m_Layer: 0
+  m_Name: TankSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1249891240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249891239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de8b6301dfc17f439c4f0530b25430b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roster: {fileID: 11400000, guid: 6f63010698b4a8a43a119a0a9b3e9c08, type: 2}
+  _tankOverride: {fileID: 0}
+  _spawnPoint: {fileID: 0}
+  _placeholder: {fileID: 3075965679102231836}
+  _healthBar: {fileID: 1853372117}
+  _manaBar: {fileID: 917284777}
+  _expBar: {fileID: 1681341039}
+--- !u!4 &1249891241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249891239}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1271405145
 GameObject:
@@ -9377,3 +9481,5 @@ SceneRoots:
   - {fileID: 5226391833922999539}
   - {fileID: 3311416782056628103}
   - {fileID: 1415910478}
+  - {fileID: 1249891241}
+  - {fileID: 1004756816}

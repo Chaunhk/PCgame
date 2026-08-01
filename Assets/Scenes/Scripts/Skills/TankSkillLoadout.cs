@@ -16,6 +16,16 @@ public class TankSkillLoadout : MonoBehaviour
     [SerializeField] private TankDefinitionSO _tankOverride;
 
     private TankDefinitionSO _tank;
+    private TankDefinitionSO _assignedTank;
+
+    /// <summary>Told to this tank by whoever spawned it, before Start runs.</summary>
+    // WHY: the spawner already resolved which tank this is; resolving it a second time here could
+    // disagree with what was spawned if the choice changed in between.
+    public void SetTank(TankDefinitionSO tank)
+    {
+        _assignedTank = tank;
+        if (_ctx != null) ApplyTank(tank);
+    }
 
     [Header("Input")]
     // WHY: left mouse is taken by the basic attack, so slots bind to keyboard keys.
@@ -44,7 +54,9 @@ public class TankSkillLoadout : MonoBehaviour
     {
         // WHY: resolved before the context is built, because the tank supplies the baseline stats
         // that every skill's numbers are measured against.
-        _tank = _tankOverride != null ? _tankOverride : TankSelection.Resolve(_roster);
+        _tank = _assignedTank != null ? _assignedTank
+            : _tankOverride != null ? _tankOverride
+            : TankSelection.Resolve(_roster);
 
         _manager = GameManager.Instance;
         if (_camera == null) _camera = _manager.mainCamera;

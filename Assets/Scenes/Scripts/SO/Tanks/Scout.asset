@@ -15,6 +15,7 @@ MonoBehaviour:
   tankId: scout
   displayName: Scout
   portrait: {fileID: 0}
+  bodyPrefab: {fileID: 4414356840055814065, guid: 4f17063e5e0494b4b9ee3e68c92b926a, type: 3}
   baseStats: {fileID: 11400000, guid: e4f29c4a04ec93245ad00e0159889f13, type: 2}
   basicSlot:
     skill: {fileID: 11400000, guid: 5e011d1229179a547937823f28a3152d, type: 2}

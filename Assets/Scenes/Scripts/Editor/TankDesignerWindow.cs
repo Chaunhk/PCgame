@@ -155,6 +155,9 @@ public class TankDesignerWindow : EditorWindow
         EditorGUILayout.SelectableLabel(_selected.tankId, EditorStyles.textField, GUILayout.Height(EditorGUIUtility.singleLineHeight));
         EditorGUILayout.EndHorizontal();
         _selected.portrait = (Sprite)EditorGUILayout.ObjectField("Portrait", _selected.portrait, typeof(Sprite), false);
+        _selected.bodyPrefab = (GameObject)EditorGUILayout.ObjectField(
+            new GUIContent("Body prefab", "This tank's own prefab. Must carry a TankRig on its root."),
+            _selected.bodyPrefab, typeof(GameObject), false);
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Base stats", EditorStyles.boldLabel);
@@ -382,6 +385,8 @@ public class TankDesignerWindow : EditorWindow
 
         if (string.IsNullOrEmpty(_selected.tankId)) problems.Add("Tank id is empty — save data cannot reference this tank.");
         if (_selected.baseStats == null) problems.Add("No base stat asset. Skill numbers have no baseline to measure against.");
+        if (_selected.bodyPrefab == null) problems.Add("No body prefab — this tank cannot be spawned.");
+        else if (_selected.bodyPrefab.GetComponent<TankRig>() == null) problems.Add($"'{_selected.bodyPrefab.name}' has no TankRig on its root, so the spawner cannot connect it to the HUD or the camera.");
         if (_selected.basicSlot.skill == null) problems.Add("No basic attack. Skills that inherit from it will contribute nothing.");
 
         if (_roster != null)
