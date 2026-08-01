@@ -11,6 +11,13 @@
 > shared effect modules, per-skill upgrade ladders, status effects, charges, targeting. It
 > revises two things stated here: slots are recommended to be **role-typed** (Basic / Sub /
 > EX) rather than free-form, which supersedes open question 3 below.
+>
+> **Third document**: `tank-config-tool.md` — the editor GUI a designer uses to author all
+> of this (which tank has which stats and skills, and what numbers), including per-tank
+> overrides so the same skill can have different numbers on a different tank. That adds one
+> layer to §3.2 below: a skill's numbers resolve as *skill default → tank override → run
+> modifiers*, so `SkillContext.Values` is built from the tank's binding, not from the skill
+> asset alone.
 
 ---
 
