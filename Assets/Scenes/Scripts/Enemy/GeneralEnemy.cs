@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -36,6 +37,9 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
 
         StopAllCoroutines();
         isIframe = false;
+        // WHY: enemies come back out of a pool, so a stale window from a previous life would make a
+        // freshly spawned enemy ignore its first hit.
+        _iframes.Clear();
 
         InitStat();
     }
@@ -65,15 +69,20 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
         }
     }
 
-    // WHY: invulnerability frames used to block EVERY kind of damage, and any hit started them.
-    // A burning zone ticking on a target that is also being shot had almost all of its ticks
-    // swallowed — the fire kit is built on burn zones, so its upgrades would have felt like they
-    // did nothing, for a reason no playtest would surface. Burn is rate-limited by its own tick
-    // interval and does not need contact immunity; only Direct hits do.
+    // WHY: invulnerability frames were global to the enemy — ONE window, started by any hit, that
+    // blocked everything. Two consequences, both wrong:
+    //   1. Several bullets landing together only counted once, so a spread shot or a multi-hit
+    //      upgrade did the damage of a single bullet. This is the bug the owner hit.
+    //   2. A burning zone ticking on a target that was also being shot had its ticks swallowed.
+    // The window now belongs to the SOURCE of the hit — which is what the packet carries a source
+    // for. One bullet cannot hit the same enemy twice inside the window; three bullets are three
+    // separate hits. Burn is rate-limited by its own tick interval and is exempt entirely.
     public void Damage(DamagePacket packet)
     {
         bool respectsIframe = packet.Tag == DamageTag.Direct;
-        if (respectsIframe && isIframe) return;
+        object source = packet.Source ?? this;
+
+        if (respectsIframe && IsBlockedFor(source)) return;
 
         currentHealth -= packet.Amount;
         healthBar.Decrease(packet.Amount);
@@ -84,14 +93,52 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
             return;
         }
 
-        if (respectsIframe) StartCoroutine(ImuneToDamage());
+        if (respectsIframe) StartIframeFor(source);
     }
 
-    IEnumerator ImuneToDamage()
+    private struct IframeWindow
     {
+        public object source;
+        public float until;
+    }
+
+    private readonly List<IframeWindow> _iframes = new List<IframeWindow>();
+
+    private bool IsBlockedFor(object source)
+    {
+        PruneIframes();
+
+        for (int i = 0; i < _iframes.Count; i++)
+            if (ReferenceEquals(_iframes[i].source, source)) return true;
+
+        return false;
+    }
+
+    private void StartIframeFor(object source)
+    {
+        float until = Time.time + iframeDuration;
+
+        for (int i = 0; i < _iframes.Count; i++)
+        {
+            if (!ReferenceEquals(_iframes[i].source, source)) continue;
+
+            _iframes[i] = new IframeWindow { source = source, until = until };
+            isIframe = true;
+            return;
+        }
+
+        _iframes.Add(new IframeWindow { source = source, until = until });
         isIframe = true;
-        yield return new WaitForSeconds(iframeDuration);
-        isIframe = false;
+    }
+
+    private void PruneIframes()
+    {
+        // WHY: sources are pooled bullets and skill instances, so the list would otherwise grow for
+        // the lifetime of the enemy. Expired entries are dropped whenever it is consulted.
+        for (int i = _iframes.Count - 1; i >= 0; i--)
+            if (Time.time >= _iframes[i].until) _iframes.RemoveAt(i);
+
+        isIframe = _iframes.Count > 0;
     }
 
     public void Dead()
