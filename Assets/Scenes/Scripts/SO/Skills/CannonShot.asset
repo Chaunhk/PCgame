@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e499bc8f12a12ff43957cff71f480f27, type: 3}
+  m_Name: CannonShot
+  m_EditorClassIdentifier: 
+  skillId: cannon_shot
+  displayName: Cannon Shot
+  description: A plain repeating shot. Which round it loads is up to the tank.
+  icon: {fileID: 0}
+  role: 0
+  activation: 0
+  cooldown: 1.2
+  maxCharges: 1
+  manaCostOnActivate: 0
+  manaCostPerTick: 0
+  tickInterval: 0.25
+  behaviourPrefab: {fileID: 3925522258599259221, guid: 2ae9f707c356b5342aa564faa0fcaab6, type: 3}
+  parameters:
+  - id: projectileCount
+    label: Rounds per shot
+    tooltip: How many rounds leave the muzzle at once.
+    type: 1
+    defaultValue: 1
+    min: 1
+    max: 12
+  - id: spreadAngle
+    label: Spread angle
+    tooltip: Degrees between neighbouring rounds. Ignored when only one is fired.
+    type: 0
+    defaultValue: 10
+    min: 0
+    max: 60
+  objectParameters:
+  - id: projectile
+    label: Round loaded
+    tooltip: Which round this cannon fires. PlayerBullet damages on impact; FireBullet
+      deals no impact damage and leaves burning ground instead.
+    kind: 0
+    defaultValue: {fileID: 3875513424055379502, guid: d18c1a344924c634f99955b9bc7006b6, type: 3}
+  scalesWithSpDamage: 1
+  scalesWithSpArea: 1
+  scalesWithSpCost: 1

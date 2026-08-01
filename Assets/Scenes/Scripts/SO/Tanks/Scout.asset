@@ -20,9 +20,12 @@ MonoBehaviour:
   basicSlot:
     skill: {fileID: 11400000, guid: 5e011d1229179a547937823f28a3152d, type: 2}
     overrides: []
+    objectOverrides: []
   subSlot:
     skill: {fileID: 11400000, guid: dd5b96d9555ca2140ba972451011416d, type: 2}
     overrides: []
+    objectOverrides: []
   exSlot:
     skill: {fileID: 11400000, guid: 3e7dc8322f11bab4a9dc447beece2b74, type: 2}
     overrides: []
+    objectOverrides: []

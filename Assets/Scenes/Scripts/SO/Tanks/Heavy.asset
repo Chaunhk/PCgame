@@ -18,15 +18,11 @@ MonoBehaviour:
   bodyPrefab: {fileID: 4414356840055814065, guid: 96d5201b699c8a44da79feb4b57992a8, type: 3}
   baseStats: {fileID: 11400000, guid: e4f29c4a04ec93245ad00e0159889f13, type: 2}
   basicSlot:
-    skill: {fileID: 11400000, guid: 5e011d1229179a547937823f28a3152d, type: 2}
+    skill: {fileID: 11400000, guid: 3655b3f1f2d504a4fbb311522792f6e9, type: 2}
     overrides:
     - parameterId: projectileCount
       value: 3
-    - parameterId: zoneDamagePerTick
-      value: 8
-    objectOverrides:
-    - parameterId: projectile
-      value: {fileID: 3875513424055379502, guid: d18c1a344924c634f99955b9bc7006b6, type: 3}
+    objectOverrides: []
   subSlot:
     skill: {fileID: 11400000, guid: dd5b96d9555ca2140ba972451011416d, type: 2}
     overrides:

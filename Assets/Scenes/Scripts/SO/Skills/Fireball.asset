@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillId: fireball
   displayName: Fireball
-  description: Throws a fireball toward the cursor. Leaves burning ground where it
-    lands.
+  description: Throws a fireball toward the cursor. It deals no impact damage; the
+    burning ground it leaves is the damage.
   icon: {fileID: 0}
   role: 0
   activation: 0
@@ -63,13 +63,7 @@ MonoBehaviour:
     defaultValue: 0.5
     min: 0.1
     max: 2
-  objectParameters:
-  - id: projectile
-    label: Round fired
-    tooltip: Which bullet this skill throws. FireBullet deals no impact damage and
-      leaves a fire patch; PlayerBullet damages on impact and leaves nothing.
-    kind: 0
-    defaultValue: {fileID: 3875513424055379502, guid: f20e6c038a4cf9b4eb089261b04cb86f, type: 3}
+  objectParameters: []
   scalesWithSpDamage: 1
   scalesWithSpArea: 1
   scalesWithSpCost: 1

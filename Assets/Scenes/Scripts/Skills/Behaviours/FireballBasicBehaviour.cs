@@ -24,11 +24,12 @@ public class FireballBasicBehaviour : SkillBehaviour
     [Tooltip("Fallback round, used only when the skill asset declares no 'projectile' parameter.")]
     [SerializeField] private GameObject _projectilePrefab;
 
-    [Tooltip("Ground zone left behind. Leave empty until the burning-ground upgrade is unlocked.")]
+    // WHY: no "leaves burning ground" toggle here any more. There were two switches for one effect —
+    // this one, and the round's own — and the round's always won, so turning this off did nothing
+    // and the fire looked impossible to stop. Whether a shot leaves fire is now decided in exactly
+    // one place: which round is loaded. Want no fire? Load the plain round.
+    [Tooltip("Zone this skill imposes on its round, so skill upgrades reach it. Empty = the round decides.")]
     [SerializeField] private GameObject _groundZonePrefab;
-
-    [Tooltip("Set by the burning-ground upgrade. Off by default, so the base attack is just a fireball.")]
-    [SerializeField] private bool _leavesBurningGround;
 
     /// The zone this skill owns. Other skills inherit a percentage of it rather than defining
     /// their own burn — see GroundZoneSource.
@@ -64,9 +65,10 @@ public class FireballBasicBehaviour : SkillBehaviour
             PooledProjectile shot = ctx.Pool.Spawn(round, ctx.Muzzle.position, rotation);
             if (shot == null) continue;
 
-            // the fireball drops the zone where it dies, if this skill is upgraded to do that
+            // hand over the skill's zone only when it actually has one; otherwise the round keeps
+            // its own settings, which is what makes a fire round behave the same whoever fires it
             FireballImpact impact = shot.GetComponent<FireballImpact>();
-            if (impact != null) impact.Configure(_leavesBurningGround ? ZoneSource : null, ctx.Pool);
+            if (impact != null) impact.Configure(ZoneSource, ctx.Pool);
         }
     }
 

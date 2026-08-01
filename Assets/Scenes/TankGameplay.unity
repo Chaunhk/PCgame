@@ -3123,7 +3123,7 @@ MonoBehaviour:
   upgradeSO: {fileID: 11400000, guid: e48e6833fb8c2d14194a6d7ab6d7946e, type: 2}
   projectilePool: {fileID: 1415910477}
   tankRoster: {fileID: 11400000, guid: 6f63010698b4a8a43a119a0a9b3e9c08, type: 2}
-  selectedTank: {fileID: 0}
+  selectedTank: {fileID: 11400000, guid: 044f38d32840cac4b9db151b23af0118, type: 2}
   laser: {fileID: 330895702}
   enemyCount: 0
   isSpawnEnd: 0
