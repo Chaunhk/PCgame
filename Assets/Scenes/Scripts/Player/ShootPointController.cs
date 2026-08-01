@@ -22,6 +22,8 @@ public class ShootPointController : MonoBehaviour
         
         _chainHitDelay = 0.1f;
         laser = _manager.laser.GetComponent<Laser>();
+
+        _legacyShooting = GetComponentInParent<TankSkillLoadout>() == null;
     }
     // WHY: aim used to be computed in FixedUpdate, which runs at the physics rate (50 Hz by
     // default) while rendering and input run per frame. The turret visibly trailed the cursor,
@@ -36,10 +38,16 @@ public class ShootPointController : MonoBehaviour
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
     }
+    // WHY: when the tank carries a skill loadout, the basic attack and the skills are slots and
+    // this component would fire a second, competing bullet stream on the same mouse button. It
+    // keeps doing the one job the loadout does not: turning the turret. Detected rather than
+    // configured, so a tank without a loadout still behaves exactly as before.
+    private bool _legacyShooting = true;
+
     private void Update()
     {
         Aim();
-        Shoot();
+        if (_legacyShooting) Shoot();
     }
     private void Shoot(){
         if (Input.GetMouseButton(0) && !_actionDelay)

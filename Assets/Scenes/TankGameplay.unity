@@ -2292,6 +2292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 3075965679102231837}
+  _tickInterval: 0.2
 --- !u!1 &1085803462
 GameObject:
   m_ObjectHideFlags: 0
@@ -8916,7 +8917,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4414356840055814065, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3075965679102231843}
   m_SourcePrefab: {fileID: 100100000, guid: 933b760bd8fae0e4b9fb3c9f19795eba, type: 3}
 --- !u!1001 &2559055966846313469
 PrefabInstance:
@@ -9076,6 +9080,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806422eff30ee5f4e947a2f7b6a96376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3075965679102231843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075965679102231836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9ad1ea9f1a5b4429dc05e18275db15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tank: {fileID: 11400000, guid: 76f10ce219e206a479c595f90a1b677e, type: 2}
+  _subKey: 113
+  _exKey: 101
+  _basicMouseButton: 0
+  _muzzle: {fileID: 0}
+  _camera: {fileID: 0}
 --- !u!1001 &3311416782056628103
 PrefabInstance:
   m_ObjectHideFlags: 0

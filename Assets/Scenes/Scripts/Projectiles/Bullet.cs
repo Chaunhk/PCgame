@@ -31,7 +31,7 @@ public class Bullet : GeneralProjectile
             IDamageable damageable = collision.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                damageable.Damage(manager.playerStat.damage);
+                damageable.Damage(new DamagePacket(manager.playerStat.damage, DamageTag.Direct, this));
             }
 
             OnHit();
