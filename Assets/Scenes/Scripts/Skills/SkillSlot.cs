@@ -35,7 +35,7 @@ public class SkillSlot
         Role = role;
     }
 
-    public void Equip(SkillDefinitionSO definition, IList<ParameterOverride> overrides, SkillContext ctx, Transform parent)
+    public void Equip(SkillDefinitionSO definition, SkillBinding binding, SkillContext ctx, Transform parent)
     {
         Unequip(ctx);
 
@@ -52,7 +52,7 @@ public class SkillSlot
 
         Definition = definition;
         Values = new SkillRuntimeValues();
-        Values.Resolve(definition, overrides, ctx.Stats, ctx.BaseStats);
+        Values.Resolve(definition, binding, ctx.Stats, ctx.BaseStats);
 
         ChargesLeft = Values.MaxCharges;
         CooldownRemaining = 0f;

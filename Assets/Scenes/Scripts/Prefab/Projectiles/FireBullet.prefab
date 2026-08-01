@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1132568427610009196}
   - component: {fileID: 4573227091883671009}
   m_Layer: 2
-  m_Name: PlayerBullet
+  m_Name: FireBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager: {fileID: 0}
   _speed: 6
-  _dealsContactDamage: 1
+  _dealsContactDamage: 0
 --- !u!114 &1132568427610009196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36d336050fb97b41a05155fd405079c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _zonePrefab: {fileID: 0}
-  _damagePerTick: 3
+  _zonePrefab: {fileID: 1108010356216328573, guid: 020fd29ccf34c444abf6ab8376ae8207, type: 3}
+  _damagePerTick: 4
   _radius: 2
   _tickInterval: 0.5
   _alsoOnExpire: 0

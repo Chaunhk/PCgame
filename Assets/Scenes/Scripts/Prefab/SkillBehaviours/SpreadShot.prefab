@@ -46,4 +46,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 3875513424055379502, guid: d18c1a344924c634f99955b9bc7006b6, type: 3}
   _groundZonePrefab: {fileID: 0}
-  _leavesBurningGround: 0

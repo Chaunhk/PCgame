@@ -47,6 +47,32 @@ public struct SkillParameter
     public float max;
 }
 
+/// <summary>What a prefab-valued parameter is allowed to point at, so the picker can filter.</summary>
+public enum SkillObjectKind
+{
+    /// A pooled projectile — a bullet, a shell.
+    Projectile,
+    /// A pooled ground effect — a fire patch.
+    GroundZone,
+    Any,
+}
+
+/// <summary>A prefab a skill lets you swap, e.g. which bullet it fires.</summary>
+// WHY: numbers alone could not express "which bullet does this skill throw", so that choice lived
+// on the behaviour prefab where the designer window could not see it — the exact thing this system
+// exists to stop. Declaring it as a parameter puts it in the window next to the numbers, and lets
+// one tank fire a different round from another without a second skill asset.
+[System.Serializable]
+public struct SkillObjectParameter
+{
+    [Tooltip("Stable key. Overrides reference it by this — renaming orphans them.")]
+    public string id;
+    public string label;
+    public string tooltip;
+    public SkillObjectKind kind;
+    public GameObject defaultValue;
+}
+
 [CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObjects/Skill")]
 public class SkillDefinitionSO : ScriptableObject
 {
@@ -80,6 +106,9 @@ public class SkillDefinitionSO : ScriptableObject
     [Header("Tuning")]
     public List<SkillParameter> parameters = new List<SkillParameter>();
 
+    [Header("Prefabs this skill lets you swap")]
+    public List<SkillObjectParameter> objectParameters = new List<SkillObjectParameter>();
+
     [Header("Scaling — which global stats reach this skill")]
     public bool scalesWithSpDamage = true;
     public bool scalesWithSpArea = true;
@@ -92,6 +121,21 @@ public class SkillDefinitionSO : ScriptableObject
             if (parameters[i].id == id)
             {
                 parameter = parameters[i];
+                return true;
+            }
+        }
+
+        parameter = default;
+        return false;
+    }
+
+    public bool TryGetObjectParameter(string id, out SkillObjectParameter parameter)
+    {
+        for (int i = 0; i < objectParameters.Count; i++)
+        {
+            if (objectParameters[i].id == id)
+            {
+                parameter = objectParameters[i];
                 return true;
             }
         }

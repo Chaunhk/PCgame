@@ -12,12 +12,23 @@ public struct ParameterOverride
     public float value;
 }
 
+/// <summary>One prefab choice on one skill, changed for one tank.</summary>
+// WHY: same sparse rule as the numeric override — storing only what differs means the tank keeps
+// following the skill asset for everything it did not deliberately change.
+[System.Serializable]
+public struct ObjectOverride
+{
+    public string parameterId;
+    public GameObject value;
+}
+
 /// <summary>A skill placed in one of a tank's slots, plus that tank's changes to its numbers.</summary>
 [System.Serializable]
 public class SkillBinding
 {
     public SkillDefinitionSO skill;
     public List<ParameterOverride> overrides = new List<ParameterOverride>();
+    public List<ObjectOverride> objectOverrides = new List<ObjectOverride>();
 }
 
 [CreateAssetMenu(fileName = "Tank", menuName = "ScriptableObjects/Tank")]
