@@ -95,7 +95,7 @@ public class TankSkillLoadout : MonoBehaviour
     private void Equip(SkillSlot slot, SkillBinding binding)
     {
         if (binding == null) return;
-        slot.Equip(binding.skill, binding.overrides, _ctx, _behaviourRoot);
+        slot.Equip(binding.skill, binding, _ctx, _behaviourRoot);
     }
 
     private void Update()

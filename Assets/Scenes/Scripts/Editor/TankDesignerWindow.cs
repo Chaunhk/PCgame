@@ -266,8 +266,13 @@ public class TankDesignerWindow : EditorWindow
 
         _paramScroll = EditorGUILayout.BeginScrollView(_paramScroll);
 
-        if (skill.parameters.Count == 0)
+        if (skill.parameters.Count == 0 && skill.objectParameters.Count == 0)
             EditorGUILayout.HelpBox("This skill declares no tunable parameters yet.", MessageType.Info);
+
+        foreach (SkillObjectParameter parameter in skill.objectParameters)
+            DrawObjectParameterRow(binding, parameter);
+
+        if (skill.objectParameters.Count > 0 && skill.parameters.Count > 0) EditorGUILayout.Space();
 
         foreach (SkillParameter parameter in skill.parameters)
             DrawParameterRow(binding, parameter);
@@ -277,17 +282,115 @@ public class TankDesignerWindow : EditorWindow
         EditorGUILayout.EndScrollView();
 
         EditorGUILayout.Space();
-        using (new EditorGUI.DisabledScope(binding.overrides.Count == 0))
+        using (new EditorGUI.DisabledScope(binding.overrides.Count == 0 && binding.objectOverrides.Count == 0))
         {
             if (GUILayout.Button("Revert all to skill defaults"))
             {
                 Undo.RecordObject(_selected, "Revert overrides");
                 binding.overrides.Clear();
+                binding.objectOverrides.Clear();
                 EditorUtility.SetDirty(_selected);
             }
         }
 
         EditorGUILayout.EndVertical();
+    }
+
+    // WHY: a dropdown of the prefabs that actually exist for this kind, not a free object slot.
+    // Dropping in an arbitrary prefab that is not pooled would compile, run, and silently fire
+    // nothing — the pool refuses prefabs it does not know.
+    private void DrawObjectParameterRow(SkillBinding binding, SkillObjectParameter parameter)
+    {
+        int index = binding.objectOverrides.FindIndex(o => o.parameterId == parameter.id);
+        bool overridden = index >= 0;
+        GameObject value = overridden ? binding.objectOverrides[index].value : parameter.defaultValue;
+
+        List<GameObject> candidates = CandidatesFor(parameter.kind);
+        var labels = new List<string> { "(none)" };
+        var values = new List<GameObject> { null };
+        int current = 0;
+
+        foreach (GameObject candidate in candidates)
+        {
+            values.Add(candidate);
+            labels.Add(candidate.name);
+            if (candidate == value) current = values.Count - 1;
+        }
+
+        if (value != null && current == 0)
+        {
+            values.Add(value);
+            labels.Add(value.name + "  (not a pooled " + parameter.kind + ")");
+            current = values.Count - 1;
+        }
+
+        EditorGUILayout.BeginHorizontal();
+
+        var content = new GUIContent(
+            parameter.label + (overridden ? " *" : string.Empty),
+            $"{parameter.tooltip}\n\nSkill default: {(parameter.defaultValue != null ? parameter.defaultValue.name : "(none)")}");
+        EditorGUILayout.LabelField(content, overridden ? _overriddenStyle : EditorStyles.label, GUILayout.Width(190f));
+
+        int picked = EditorGUILayout.Popup(current, labels.ToArray());
+
+        using (new EditorGUI.DisabledScope(!overridden))
+        {
+            if (GUILayout.Button("Revert", GUILayout.Width(56f)) && overridden)
+            {
+                Undo.RecordObject(_selected, "Revert prefab override");
+                binding.objectOverrides.RemoveAt(index);
+                EditorUtility.SetDirty(_selected);
+                EditorGUILayout.EndHorizontal();
+                return;
+            }
+        }
+
+        EditorGUILayout.EndHorizontal();
+
+        if (picked == current) return;
+
+        GameObject chosen = values[picked];
+        Undo.RecordObject(_selected, "Set prefab override");
+
+        if (chosen == parameter.defaultValue)
+        {
+            if (overridden) binding.objectOverrides.RemoveAt(index);
+        }
+        else if (overridden)
+        {
+            binding.objectOverrides[index] = new ObjectOverride { parameterId = parameter.id, value = chosen };
+        }
+        else
+        {
+            binding.objectOverrides.Add(new ObjectOverride { parameterId = parameter.id, value = chosen });
+        }
+
+        binding.objectOverrides.Sort((a, b) => string.CompareOrdinal(a.parameterId, b.parameterId));
+        EditorUtility.SetDirty(_selected);
+    }
+
+    private static List<GameObject> CandidatesFor(SkillObjectKind kind)
+    {
+        var found = new List<GameObject>();
+
+        foreach (string guid in AssetDatabase.FindAssets("t:Prefab"))
+        {
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guid));
+            if (prefab == null || prefab.GetComponent<PooledProjectile>() == null) continue;
+
+            bool isZone = prefab.GetComponent<DamagePerTick>() != null;
+            bool isShot = prefab.GetComponent<Bullet>() != null;
+
+            bool matches =
+                kind == SkillObjectKind.Any ||
+                (kind == SkillObjectKind.GroundZone && isZone) ||
+                (kind == SkillObjectKind.Projectile && isShot && !isZone);
+
+            if (matches) found.Add(prefab);
+        }
+
+        found.Sort((a, b) => string.CompareOrdinal(a.name, b.name));
+        return found;
     }
 
     private void DrawParameterRow(SkillBinding binding, SkillParameter parameter)

@@ -41,6 +41,12 @@ MonoBehaviour:
     defaultValue: 12
     min: 0
     max: 60
+  objectParameters:
+  - id: projectile
+    label: Round fired
+    tooltip: Which bullet each shot of the volley uses.
+    kind: 0
+    defaultValue: {fileID: 3875513424055379502, guid: d18c1a344924c634f99955b9bc7006b6, type: 3}
   scalesWithSpDamage: 1
   scalesWithSpArea: 1
   scalesWithSpCost: 1

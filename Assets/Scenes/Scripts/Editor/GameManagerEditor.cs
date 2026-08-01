@@ -96,7 +96,8 @@ public class GameManagerEditor : Editor
     {
         if (binding == null || binding.skill == null) return "— empty";
 
-        int overrides = binding.overrides != null ? binding.overrides.Count : 0;
+        int overrides = (binding.overrides != null ? binding.overrides.Count : 0)
+                      + (binding.objectOverrides != null ? binding.objectOverrides.Count : 0);
         return overrides > 0
             ? $"{binding.skill.displayName}  ({overrides} tuned)"
             : binding.skill.displayName;

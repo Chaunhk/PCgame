@@ -11,6 +11,7 @@ using UnityEngine;
 public class SkillRuntimeValues
 {
     private readonly Dictionary<string, float> _values = new Dictionary<string, float>();
+    private readonly Dictionary<string, GameObject> _objects = new Dictionary<string, GameObject>();
 
     public SkillDefinitionSO Definition { get; private set; }
 
@@ -28,10 +29,34 @@ public class SkillRuntimeValues
     // discount made every skill free; spDamage starts at 1, so reading it as an absolute bonus
     // would quietly add 1 to everything. Deltas keep the skill asset the single source of a
     // skill's real numbers while the upgrade cards keep working unchanged.
-    public void Resolve(SkillDefinitionSO definition, IList<ParameterOverride> overrides, PlayerStatSO stats, PlayerStatSO baseStats)
+    public void Resolve(SkillDefinitionSO definition, SkillBinding binding, PlayerStatSO stats, PlayerStatSO baseStats)
     {
+        IList<ParameterOverride> overrides = binding != null ? binding.overrides : null;
+
         Definition = definition;
         _values.Clear();
+        _objects.Clear();
+
+        // prefab choices resolve the same two layers: the skill's own, then this tank's swap
+        foreach (SkillObjectParameter parameter in definition.objectParameters)
+            _objects[parameter.id] = parameter.defaultValue;
+
+        if (binding != null && binding.objectOverrides != null)
+        {
+            for (int i = 0; i < binding.objectOverrides.Count; i++)
+            {
+                ObjectOverride entry = binding.objectOverrides[i];
+                if (string.IsNullOrEmpty(entry.parameterId)) continue;
+
+                if (!definition.TryGetObjectParameter(entry.parameterId, out _))
+                {
+                    Debug.LogWarning($"Skill '{definition.skillId}': prefab override for unknown parameter '{entry.parameterId}' is being ignored.");
+                    continue;
+                }
+
+                _objects[entry.parameterId] = entry.value;
+            }
+        }
 
         // layer 1 — the skill's own declared defaults
         foreach (SkillParameter parameter in definition.parameters)
@@ -77,6 +102,12 @@ public class SkillRuntimeValues
         BonusDamage = hasRunStats && definition.scalesWithSpDamage
             ? stats.spDamage - baseStats.spDamage
             : 0;
+    }
+
+    /// <summary>A prefab this skill lets you swap, after the tank's choice is applied.</summary>
+    public GameObject GetObject(string parameterId, GameObject fallback = null)
+    {
+        return _objects.TryGetValue(parameterId, out GameObject value) && value != null ? value : fallback;
     }
 
     public float Get(string parameterId, float fallback = 0f)

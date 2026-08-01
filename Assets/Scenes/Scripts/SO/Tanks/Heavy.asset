@@ -24,6 +24,9 @@ MonoBehaviour:
       value: 3
     - parameterId: zoneDamagePerTick
       value: 8
+    objectOverrides:
+    - parameterId: projectile
+      value: {fileID: 3875513424055379502, guid: d18c1a344924c634f99955b9bc7006b6, type: 3}
   subSlot:
     skill: {fileID: 11400000, guid: dd5b96d9555ca2140ba972451011416d, type: 2}
     overrides:
@@ -31,8 +34,10 @@ MonoBehaviour:
       value: 60
     - parameterId: blastRadius
       value: 5
+    objectOverrides: []
   exSlot:
     skill: {fileID: 11400000, guid: 3e7dc8322f11bab4a9dc447beece2b74, type: 2}
     overrides:
     - parameterId: zoneCount
       value: 12
+    objectOverrides: []
