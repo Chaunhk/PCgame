@@ -41,7 +41,8 @@ public class ShootPointController : MonoBehaviour
     private void Shoot(){
         if (Input.GetMouseButton(0) && !_actionDelay)
         {
-            StartCoroutine(ShootBurst());
+            StartCoroutine(ShootSpread());
+            // StartCoroutine(ShootBurst());
         }
         if(Input.GetKeyDown(KeyCode.E)){
             canon.EnableFire(transform);
@@ -62,14 +63,16 @@ public class ShootPointController : MonoBehaviour
         }
         
     }
-    private void SpawnBullet(){
+    private void SpawnBullet(float angle = 0f){
         
         foreach (GameObject bullet in _manager.listBullet)
         {
             if (!bullet.activeSelf)
             {
+                //Vector3 dir = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + angle) * Vector3.right;
                 bullet.transform.position = _manager.shootPoint.transform.position;
                 bullet.transform.rotation = transform.rotation;
+                bullet.transform.Rotate(0, 0, angle);
                 bullet.SetActive(true);
                 break;
             }
@@ -87,5 +90,16 @@ public class ShootPointController : MonoBehaviour
         _actionDelay = false;
     }
     
+    private IEnumerator ShootSpread(){
+        _actionDelay = true;
+        int hits = _manager.playerStat.multiHit;
+        float spreadAngle = 15f; // Adjust this value for the desired spread angle
+        for (int i = 0; i < hits; i++) {
+            float angle = spreadAngle * (i - (hits - 1) / 2f);
+            SpawnBullet(angle);
+        }
+        yield return new WaitForSeconds(_actionSpeed);
+        _actionDelay = false;
+    }
 }
 

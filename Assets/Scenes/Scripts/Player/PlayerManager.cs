@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public int currentHealth;
     public int maxMana;
     public int currentMana;
+    public float basePickUp = 1f;
     public float pickUpRadius;
     public GameManager manager;
     //public ExpManager expManager;
@@ -23,6 +24,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         manager = GameManager.Instance;
         _playerStat = manager.playerStat;
+        pickUpRadius = basePickUp;
         InitStat();
         StartCoroutine(ManaRegenLoop());  
     }
@@ -61,6 +63,8 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
         // Mana regen
         _manaRegen = _playerStat.manaRegen;
+
+        pickUpRadius = basePickUp*_playerStat.spMod;
     }
     #endregion
     #region HP related 
@@ -154,12 +158,14 @@ public class PlayerManager : MonoBehaviour, IDamageable
     #region Pickup
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("Got "+ collision.tag);
-        if (collision.CompareTag("Exp"))
+        if (!collision.CompareTag("Exp")) return;
+
+        ExpBehavior exp = collision.GetComponent<ExpBehavior>();
+        if (exp != null && exp.CanStartPickup && Vector3.Distance(transform.position, collision.transform.position) <= pickUpRadius)
         {
-            ExpBehavior exp = collision.GetComponent<ExpBehavior>();
             exp.StartMoving(transform);
         }
     }
+
     #endregion
 }
