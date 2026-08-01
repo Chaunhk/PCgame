@@ -284,7 +284,7 @@ Steps 1, 2 and 6 are useful even if the whole slot system were rejected.
 4. **"30~50%" — is that a designed range** (i.e. it becomes a tunable per skill) or a
    placeholder for one number to be picked later?
 5. ~~Does the Basic attack auto-fire, or does the player press to throw?~~ **Answered: it
-   auto-fires.** See §10.
+   stays exactly as it is today — hold left mouse to fire.** See §10.
 6. ~~Is "joystick direction" a real gamepad path, or shorthand for aim direction?~~
    **Answered: move on the stick, aim with the mouse.** See §10.
 
@@ -296,34 +296,29 @@ Steps 1, 2 and 6 are useful even if the whole slot system were rejected.
 |---|---|---|
 | Movement stick / WASD | tank body moves, body turns toward movement | `Player/MovementController.cs:28-48` — already this |
 | Mouse cursor | aim: the turret and every skill point at the cursor | `Player/ShootPointController.cs:29-34` — already this |
-| — | **basic attack fires by itself** on its own timer | **not this yet** — see below |
+| Left mouse held | basic attack fires on the attack-rate interval while held | `Player/ShootPointController.cs:42-45` — already this |
 
-So the game is an auto-shooter with manual aim: the player steers and points, and never
-presses a fire button.
+**Nothing in the control scheme changes.** All three rows are how the game already works;
+the kit is being built on top of the existing feel, not on a new one. The kit's "every 2
+seconds" is therefore the attack-rate interval *while the button is held*, not a free-running
+timer.
 
-**What has to change.** Shooting is currently gated on the mouse button being held
-(`ShootPointController.cs:42`). Auto-fire means dropping that gate and letting the
-attack-rate timer drive the loop on its own. Two consequences worth stating before it is
-built:
+Two things follow, and both are constraints rather than choices:
 
-- **"Attack rate" becomes the auto-fire interval**, i.e. the kit's "every 2 seconds". It is
-  no longer a floor on how fast a player can click, so the upgrade that improves it is now
-  strictly a rate change with no skill-expression component. That is the normal auto-shooter
-  trade and matches the kit as written — just confirming it is intended.
-- **The mouse button is now free.** If it stays unused, aiming is the only thing the mouse
-  does. Worth deciding whether one of the three slots binds to it (right or left click)
-  instead of a keyboard key — natural on this control scheme, and it is the difference
-  between reaching for `R` mid-dodge or not.
+- **The left mouse button is taken.** Skill slots bind to keyboard keys — the mouse cannot
+  host one without fighting the attack. (Right mouse is technically free, but binding a slot
+  there while the left is held-to-fire means holding both buttons during a channelled skill;
+  worth a playtest before committing.)
+- **The EX fire carpet's direction is the mouse aim.** "Along the joystick or current
+  facing" resolves to the same `SkillContext.AimWorldPos`
+  (`skill-plugin-system.md` §3.3) every other skill already reads — one source, resolved
+  once per frame, no per-skill input branching. The carpet lays from behind the tank to in
+  front *of that direction*. If a gamepad build ever happens, only the code that fills
+  `AimWorldPos` changes and no skill is touched.
 
-**Aim source stays a single value, not a branch.** Because aim is the mouse and movement is
-the stick, `SkillContext.AimWorldPos` (`skill-plugin-system.md` §3.3) is the cursor
-position, resolved once per frame, and every skill reads it. The EX fire carpet's "along
-the joystick or current facing direction" therefore resolves to **the aim direction**, which
-is the same value — one source, no per-skill input branching. If a gamepad build ever
-happens, only the code that fills `AimWorldPos` changes; no skill is touched.
-
-One thing this makes cheap and worth doing now: keep aim in `Update`, not `FixedUpdate`
-(`skill-plugin-system.md` §5.4). With no fire button, aim *is* the player's entire moment
-to moment expression, and it currently updates at physics rate while the frame rate is
-higher — the turret visibly trails the cursor. That fix matters more under auto-fire than it
-did before.
+**One fix this makes more valuable, not less**: computing aim in `Update` rather than
+`FixedUpdate` (`skill-plugin-system.md` §5.4). Aim is the player's whole moment-to-moment
+expression here — it drives the turret *and* the direction of a skill that lays fire across
+the screen. Right now it is recomputed at physics rate while the frame rate is higher, so the
+turret trails the cursor and the carpet fires along a direction that is up to one physics
+step stale.
