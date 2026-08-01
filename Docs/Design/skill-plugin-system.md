@@ -5,6 +5,12 @@
 > Goal: a tank carries **3 skill slots**, each slot filled by a **skill asset**. Adding a
 > new skill must mean *creating one asset + one behaviour script* — never editing the
 > tank, the input code, or the HUD.
+>
+> **Companion document**: `skill-content-requirements.md` takes the owner's first real kit
+> (fireball / ground slam / EX) and works out what this plumbing must gain to express it —
+> shared effect modules, per-skill upgrade ladders, status effects, charges, targeting. It
+> revises two things stated here: slots are recommended to be **role-typed** (Basic / Sub /
+> EX) rather than free-form, which supersedes open question 3 below.
 
 ---
 
@@ -345,7 +351,13 @@ These are pre-existing and independent of the slot system; the first two will bi
    without spending otherwise.
 
 3. **Health regen never runs** — `HealthRegenLoop` exists but only `ManaRegenLoop` is
-   started (`PlayerManager.cs:29`), so `healthRegen` and its upgrade card do nothing.
+   started (`PlayerManager.cs:29`), so `healthRegen` and its upgrade card do nothing. The
+   suppression half is missing too: `DamagedDelay` — the coroutine that pauses regen after
+   being hit — has no caller, so `_isHealthRegenBlocked` is never set. **Owner's answer:
+   health regen is meant to work exactly like mana regen** — tick on the same interval,
+   and pause for a window after the triggering event (damage taken, mirroring how skill use
+   pauses mana). So the fix is two lines: start the loop next to `ManaRegenLoop`, and call
+   `DamagedDelay` from `Damage`. No new mechanic, just the wiring that was never connected.
 
 4. **Aim is computed in the physics loop** — `ShootPointController.FixedUpdate:29-34`
    computes the cursor world position, while `Update` shoots with it. At 50 Hz physics vs
