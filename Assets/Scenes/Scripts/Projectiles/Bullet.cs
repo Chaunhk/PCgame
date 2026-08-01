@@ -7,11 +7,19 @@ public class Bullet : GeneralProjectile
 {
     [SerializeField] private float _speed;
 
+    // WHY: a delivery round exists — a bullet whose whole job is to put something on the ground
+    // where it lands. Its damage must come from what it leaves behind, not from the impact, or the
+    // same shot would be paid for twice and the zone's numbers would stop being the real ones.
+    [Tooltip("Off for a bullet that only delivers an effect: it still stops on contact, but the hit itself does nothing.")]
+    [SerializeField] private bool _dealsContactDamage = true;
+
     private PooledProjectile _pooled;
+    private FireballImpact _impact;
 
     protected virtual void Awake()
     {
         _pooled = GetComponent<PooledProjectile>();
+        _impact = GetComponent<FireballImpact>();
     }
 
     private void Update()
@@ -28,11 +36,16 @@ public class Bullet : GeneralProjectile
     {
         if (collision.CompareTag("Ground") || collision.CompareTag(tagDamage))
         {
-            IDamageable damageable = collision.GetComponent<IDamageable>();
-            if (damageable != null)
+            if (_dealsContactDamage)
             {
-                damageable.Damage(new DamagePacket(manager.playerStat.damage, DamageTag.Direct, this));
+                IDamageable damageable = collision.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    damageable.Damage(new DamagePacket(manager.playerStat.damage, DamageTag.Direct, this));
+                }
             }
+
+            if (_impact != null) _impact.NotifyHit();
 
             OnHit();
             _pooled.Despawn();

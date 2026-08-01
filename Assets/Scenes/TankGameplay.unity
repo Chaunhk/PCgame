@@ -375,6 +375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerManager: {fileID: 3075965679102231837}
   _speed: 12
+  _dealsContactDamage: 1
   _layerMask:
     serializedVersion: 2
     m_Bits: 71
@@ -2929,6 +2930,9 @@ MonoBehaviour:
   - prefab: {fileID: 1108010356216328573, guid: 020fd29ccf34c444abf6ab8376ae8207, type: 3}
     prewarm: 16
     maxSize: 128
+  - prefab: {fileID: 3875513424055379502, guid: f20e6c038a4cf9b4eb089261b04cb86f, type: 3}
+    prewarm: 32
+    maxSize: 256
 --- !u!4 &1415910478
 Transform:
   m_ObjectHideFlags: 0

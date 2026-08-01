@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae136cf0dc791048b77faa89bfe95ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 3875513424055379502, guid: d18c1a344924c634f99955b9bc7006b6, type: 3}
+  _projectilePrefab: {fileID: 3875513424055379502, guid: f20e6c038a4cf9b4eb089261b04cb86f, type: 3}
   _groundZonePrefab: {fileID: 1108010356216328573, guid: 020fd29ccf34c444abf6ab8376ae8207, type: 3}
   _leavesBurningGround: 1
