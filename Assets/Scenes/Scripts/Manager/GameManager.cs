@@ -37,8 +37,10 @@ public class GameManager : MonoBehaviour
     public GameObject shootPoint;
     public UpgradeSO upgradeSO;
       // change this param into playerstatSO
-    public GameObject[] listBullet;
-    public GameObject[] listFire;
+    // WHY: listBullet/listFire (51 and 11 hand-placed scene objects, searched linearly for a
+    // free one on every shot) are replaced by ProjectilePool, which is the same UnityEngine.Pool
+    // shape MobPoolManager already uses for enemies.
+    public ProjectilePool projectilePool;
     public GameObject laser;
     public int enemyCount;
     public bool isSpawnEnd;
