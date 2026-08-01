@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8817cea848a0bb44a9f4dc4802c3e6df, type: 3}
+  m_Name: Heavy
+  m_EditorClassIdentifier: 
+  tankId: heavy
+  displayName: Heavy
+  portrait: {fileID: 0}
+  bodyPrefab: {fileID: 4414356840055814065, guid: 96d5201b699c8a44da79feb4b57992a8, type: 3}
+  baseStats: {fileID: 11400000, guid: e4f29c4a04ec93245ad00e0159889f13, type: 2}
+  basicSlot:
+    skill: {fileID: 11400000, guid: 5e011d1229179a547937823f28a3152d, type: 2}
+    overrides:
+    - parameterId: projectileCount
+      value: 3
+    - parameterId: zoneDamagePerTick
+      value: 8
+  subSlot:
+    skill: {fileID: 11400000, guid: dd5b96d9555ca2140ba972451011416d, type: 2}
+    overrides:
+    - parameterId: blastDamage
+      value: 60
+    - parameterId: blastRadius
+      value: 5
+  exSlot:
+    skill: {fileID: 11400000, guid: 3e7dc8322f11bab4a9dc447beece2b74, type: 2}
+    overrides:
+    - parameterId: zoneCount
+      value: 12

@@ -12,6 +12,7 @@ public class ShootPointController : MonoBehaviour
     [SerializeField] private float _chainHitDelay;
     [SerializeField] private Canon canon;
     [SerializeField] private Laser laser;
+    [SerializeField] private GameObject _bulletPrefab;
     
     private void Start()
     {
@@ -21,6 +22,8 @@ public class ShootPointController : MonoBehaviour
         
         _chainHitDelay = 0.1f;
         laser = _manager.laser.GetComponent<Laser>();
+
+        _legacyShooting = GetComponentInParent<TankSkillLoadout>() == null;
     }
     // WHY: aim used to be computed in FixedUpdate, which runs at the physics rate (50 Hz by
     // default) while rendering and input run per frame. The turret visibly trailed the cursor,
@@ -35,10 +38,16 @@ public class ShootPointController : MonoBehaviour
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
     }
+    // WHY: when the tank carries a skill loadout, the basic attack and the skills are slots and
+    // this component would fire a second, competing bullet stream on the same mouse button. It
+    // keeps doing the one job the loadout does not: turning the turret. Detected rather than
+    // configured, so a tank without a loadout still behaves exactly as before.
+    private bool _legacyShooting = true;
+
     private void Update()
     {
         Aim();
-        Shoot();
+        if (_legacyShooting) Shoot();
     }
     private void Shoot(){
         if (Input.GetMouseButton(0) && !_actionDelay)
@@ -66,19 +75,11 @@ public class ShootPointController : MonoBehaviour
         
     }
     private void SpawnBullet(float angle = 0f){
-        
-        foreach (GameObject bullet in _manager.listBullet)
-        {
-            if (!bullet.activeSelf)
-            {
-                //Vector3 dir = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + angle) * Vector3.right;
-                bullet.transform.position = _manager.shootPoint.transform.position;
-                bullet.transform.rotation = transform.rotation;
-                bullet.transform.Rotate(0, 0, angle);
-                bullet.SetActive(true);
-                break;
-            }
-        }
+        // WHY: this used to scan listBullet for an inactive entry and simply do nothing when the
+        // array was exhausted — a shot that vanished with no bullet and no error. The pool grows
+        // instead, and says so in the console if the prefab was never registered.
+        Quaternion rotation = transform.rotation * Quaternion.Euler(0, 0, angle);
+        _manager.projectilePool.Spawn(_bulletPrefab, _manager.shootPoint.transform.position, rotation);
     }
     private IEnumerator ShootBurst() {
         _actionDelay = true;

@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e499bc8f12a12ff43957cff71f480f27, type: 3}
+  m_Name: FireCarpet
+  m_EditorClassIdentifier: 
+  skillId: fire_carpet
+  displayName: Fire Carpet
+  description: Lays a trail of fire from behind the tank to in front, along the aim
+    direction.
+  icon: {fileID: 0}
+  role: 2
+  activation: 0
+  cooldown: 12
+  maxCharges: 2
+  manaCostOnActivate: 30
+  manaCostPerTick: 0
+  tickInterval: 0.25
+  behaviourPrefab: {fileID: 2086868943605205418, guid: 096fe10cfb43f8840aa6734468216856, type: 3}
+  parameters:
+  - id: zoneCount
+    label: Fire patches
+    tooltip: How many burning patches the carpet is made of, spaced evenly along
+      its length.
+    type: 1
+    defaultValue: 7
+    min: 2
+    max: 30
+  - id: lengthAhead
+    label: Reach ahead
+    tooltip: How far in front of the tank the carpet extends, in world units.
+    type: 0
+    defaultValue: 7
+    min: 1
+    max: 30
+  - id: lengthBehind
+    label: Reach behind
+    tooltip: How far behind the tank the carpet starts, in world units.
+    type: 0
+    defaultValue: 2
+    min: 0
+    max: 15
+  - id: zoneDamagePerTick
+    label: Burn damage per tick (own)
+    tooltip: Each patch's own base damage, before inheriting from the basic attack.
+    type: 1
+    defaultValue: 2
+    min: 0
+    max: 100
+  - id: zoneRadius
+    label: Patch radius (own)
+    tooltip: Each patch's own base size, before inheriting from the basic attack.
+    type: 0
+    defaultValue: 1.5
+    min: 0.5
+    max: 10
+  - id: zoneInherit
+    label: Inherit from basic attack
+    tooltip: Share of the basic attack's burn added to every patch.
+    type: 2
+    defaultValue: 0.4
+    min: 0
+    max: 1
+  - id: zoneTickInterval
+    label: Burn tick interval
+    tooltip: Seconds between burn ticks. 0 means copy the basic attack's interval.
+    type: 3
+    defaultValue: 0
+    min: 0
+    max: 2
+  scalesWithSpDamage: 1
+  scalesWithSpArea: 1
+  scalesWithSpCost: 1
