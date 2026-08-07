@@ -114,7 +114,7 @@ public class MobPoolManager : MonoBehaviour
             Vector3 spawnPos = GetRandomSpawnPoint();
 
             // 2. Spawn the mob using your pool
-            SpawnMob(spawnPos);
+            //SpawnMob(spawnPos);
 
             // 3. Reset timer
             timer = 0;

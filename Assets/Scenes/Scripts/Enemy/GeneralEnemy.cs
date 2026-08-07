@@ -26,7 +26,7 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
     private IObjectPool<GeneralEnemy> pool;
 
     // Called from MobPoolManager when taken from pool
-    public void Initialize(DropService service, IObjectPool<GeneralEnemy> poolRef)
+    public virtual void Initialize(DropService service, IObjectPool<GeneralEnemy> poolRef)
     {
         dropService = service;
         pool = poolRef;
@@ -53,7 +53,7 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
         healthBar.InitData(maxHealth);
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (manager == null || manager.player == null) return;
 
@@ -88,7 +88,7 @@ public class GeneralEnemy : MonoBehaviour, IDamageable
         isIframe = false;
     }
 
-    public void Dead()
+    public virtual void Dead()
     {
         // Spawn drops BEFORE releasing to pool
         Drop();
